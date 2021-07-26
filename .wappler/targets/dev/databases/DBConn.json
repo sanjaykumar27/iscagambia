@@ -1,0 +1,13 @@
+{
+  "schema": {
+    "tables": {
+      "user_form": {
+        "db": {}
+      },
+      "users": {
+        "db": {}
+      }
+    },
+    "views": {}
+  }
+}

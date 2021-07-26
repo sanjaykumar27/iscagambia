@@ -1,0 +1,46 @@
+{
+  "projectName": "iscambia",
+  "styleFile": "/css/style.css",
+  "assetsFolder": "/assets",
+  "designFramework": "bootstrap4",
+  "frameworks": [
+    {
+      "name": "jquery_slim_33",
+      "type": "cdn"
+    },
+    {
+      "name": "fontawesome_4",
+      "type": "cdn"
+    },
+    {
+      "name": "appConnect",
+      "type": "local"
+    },
+    {
+      "name": "bootstrap5",
+      "type": "local"
+    }
+  ],
+  "projectServerModel": "PHP",
+  "activeTarget": "dev",
+  "useRouting": true,
+  "addBase": true,
+  "routingHandler": "apache",
+  "projectType": "web",
+  "targets": [
+    {
+      "access": "local",
+      "name": "localhost",
+      "remoteURL": "http://localhost/iscambia"
+    },
+    {
+      "access": "ftp",
+      "name": "dev",
+      "remoteURL": "http://iscagambia.com",
+      "ftpServer": "119.18.58.235",
+      "ftpUser": "admin_wappler@iscagambia.com",
+      "ftpPassword": "5dffe1d2f9d3e7af6ff47026",
+      "ftpPort": 21
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "routes": [
+    {
+      "path": "/",
+      "url": "/index.php",
+      "routes": [
+        {
+          "type": "page",
+          "path": "/registor",
+          "id": "routeRegistration",
+          "url": "registor.php"
+        }
+      ]
+    }
+  ]
+}
