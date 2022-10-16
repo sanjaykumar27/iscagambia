@@ -413,7 +413,7 @@ function getProc($proc_name) {
 function getResult($sql) {
 	global $driver, $dsn, $user, $password, $sslca, $sslverify;
 	try {
-		if ($driver == 'sqlite' && !preg_match('(/^sqlite:\//|:\/)', $dsn)) {
+		if ($driver == 'sqlite') {
 			$new_dsn = str_replace('sqlite:', 'sqlite:'. $_SERVER['DOCUMENT_ROOT'] . '/', $dsn);
 			$pdo = new PDO($new_dsn, $user, $password);			
 		} else {

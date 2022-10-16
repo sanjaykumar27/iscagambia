@@ -53,6 +53,16 @@ class App
             }
         }
 
+        if (CONFIG('ENV')) {
+            $env = json_decode(CONFIG('ENV'), TRUE);
+
+            foreach ($env as $name => $value) {
+                if (!isset($_ENV[$name])) {
+                    $_ENV[$name] = $value;
+                }
+            }
+        }
+
         $this->scope->set(array(
             '$_ERROR' => NULL,
             '$_SERVER' => $this->request->server,
@@ -167,15 +177,7 @@ class App
 
         if (is_callable($steps)) {
             try {
-                $data = $steps();
-
-                if (isset($steps->name) && isset($data)) {
-                    $this->scope->set($steps->name, $data);
-
-                    if (isset($steps->output) && $steps->output === TRUE) {
-                        $this->data[$steps->name] = $data;
-                    }
-                }
+                $steps();
             } catch(\Exception $err) {
                 $this->error = $err;
                 return;
@@ -192,9 +194,9 @@ class App
 
 			try {
                 if (method_exists($module, $steps->action)) {
-				    $data = $module->{$steps->action}(isset($steps->options) ? clone $steps->options : NULL, isset($steps->name) ? $steps->name : NULL);
+				    $data = $module->{$steps->action}(isset($steps->options) ? clone $steps->options : NULL, isset($steps->name) ? $steps->name : NULL, isset($steps->meta) ? $steps->meta : NULL);
                 } elseif (method_exists($module, '_'.$steps->action)) {
-                    $data = $module->{'_'.$steps->action}(isset($steps->options) ? clone $steps->options : NULL, isset($steps->name) ? $steps->name : NULL);
+                    $data = $module->{'_'.$steps->action}(isset($steps->options) ? clone $steps->options : NULL, isset($steps->name) ? $steps->name : NULL, isset($steps->meta) ? $steps->meta : NULL);
                 } else {
                     throw new \Exception("Action $steps->action doesn't exist in $module", 1);
                 }

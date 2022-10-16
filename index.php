@@ -7,7 +7,6 @@
     <script src="dmxAppConnect/dmxAppConnect.js"></script>
     <meta charset="UTF-8">
     <title>Iscambia</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="bootstrap/5/css/bootstrap.min.css" />
     <script src="js/jquery-3.4.1.slim.min.js"></script>
@@ -38,6 +37,7 @@
     <script src="dmxAppConnect/dmxBootstrap5Navigation/dmxBootstrap5Navigation.js" defer=""></script>
     <script src="dmxAppConnect/dmxRouting/dmxRouting.js" defer=""></script>
     <script src="dmxAppConnect/dmxBrowser/dmxBrowser.js" defer=""></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous" />
 </head>
 
 <body is="dmx-app" id="index" class="">
@@ -70,12 +70,13 @@
                         <li class="nav-item">
                             <a class="nav-link fs-5 text-dark me-3" href="#">Contact</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link fs-5 text-white me-3" href="./gala-dinner">Gala Dinner</a>
+                        </li>
                     </ul>
-
                 </div>
             </div>
         </nav>
-
     </header>
     <div class="container">
         <div id="conditional1" is="dmx-if" dmx-bind:condition="browser1.location.pathname == '/'">
@@ -87,7 +88,9 @@
             </div>
         </div>
         <div id="divRoutes">
-            <div is="dmx-route" id="routeRegistration" path="/registor" url="registor.php"></div>
+            <div is="dmx-route" id="routeRegistration" path="/registor" url="registor.php">
+            </div>
+            <div is="dmx-route" id="routeGalaDinner" url="gala_dinner.php" path="/gala-dinner"></div>
         </div>
     </div>
     <script src="bootstrap/5/js/bootstrap.bundle.min.js"></script>

@@ -61,10 +61,13 @@ class api extends Module
                 if (!isset($headers['Content-Type'])) {
                     $headers['Content-Type'] = 'application/' . $options->dataType;
                 }
-                if ($options->dataType == 'x-www-form-urlencoded') {
-                    $data = http_build_query($options->data);
-                } else {
-                    $data = json_encode($options->data);
+
+                if (!empty($data)) {
+                    if ($options->dataType == 'x-www-form-urlencoded') {
+                        $data = http_build_query($options->data);
+                    } else {
+                        $data = json_encode($options->data);
+                    }
                 }
             } elseif ($method == 'POST') {
                 curl_setopt($handle, CURLOPT_POST, TRUE);
@@ -254,7 +257,16 @@ class api extends Module
         }
     }
 
+    protected function remove_utf8_bom($text)
+    {
+        $bom = pack('H*','EFBBBF');
+        $text = preg_replace("/^$bom/", '', $text);
+        return $text;
+    }
+
     protected function parseBody($rawBody) {
+        $rawBody = $this->remove_utf8_bom($rawBody);
+
         $json = json_decode($rawBody);
 
         if (json_last_error() === JSON_ERROR_NONE) {

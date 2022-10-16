@@ -60,7 +60,8 @@ class Request
         $post = $_POST;
 
         if (stripos($contentType, 'application/json') === 0) {
-            $post = json_decode(trim(file_get_contents('php://input')), TRUE);
+            $raw = $this->remove_utf8_bom(file_get_contents('php://input'));
+            $post = json_decode($raw, TRUE);
         } else {
             // Extend post data with files data
             foreach ($_FILES as $field => $file) {
@@ -79,6 +80,13 @@ class Request
         }
 
         return $post;
+    }
+
+    private function remove_utf8_bom($text)
+    {
+        $bom = pack('H*','EFBBBF');
+        $text = preg_replace("/^$bom/", '', $text);
+        return $text;
     }
 
     private function parseField($name, $src, &$dest) {

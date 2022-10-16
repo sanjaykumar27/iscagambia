@@ -5,9 +5,47 @@
         "db": {}
       },
       "users": {
-        "db": {}
+        "db": {},
+        "columns": {
+          "id": {
+            "db": {
+              "type": "integer",
+              "primary": true
+            }
+          },
+          "email": {
+            "db": {
+              "type": "string"
+            }
+          },
+          "password": {
+            "db": {
+              "type": "string"
+            }
+          },
+          "first_name": {
+            "db": {
+              "type": "string"
+            }
+          },
+          "last_name": {
+            "db": {
+              "type": "string"
+            }
+          }
+        }
       }
     },
     "views": {}
-  }
+  },
+  "type": "mysql",
+  "connection": {
+    "host": "119.18.58.235",
+    "port": 3306,
+    "user": "root",
+    "password": "0kVw.,-8?EIa",
+    "database": "iscagamb_forms",
+    "charset": "utf8"
+  },
+  "direct": true
 }

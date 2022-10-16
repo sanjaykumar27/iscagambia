@@ -8,6 +8,7 @@ $CONFIG_CORS_ORIGIN = FALSE;
 $CONFIG_CORS_METHODS = 'GET,POST';
 $CONFIG_CORS_ALLOWED_HEADERS = '*';
 $CONFIG_CORS_CREDENTIALS = TRUE;
+$CONFIG_ENV = FALSE;
 
 $configPath = BASE_URL . DIRECTORY_SEPARATOR . str_replace('/', DIRECTORY_SEPARATOR, '../dmxConnect/config.php');
 if (file_exists($configPath)) {
@@ -15,17 +16,9 @@ if (file_exists($configPath)) {
 }
 
 function CONFIG($prop) {
-  global ${'CONFIG_' . $prop};
-
+	global ${'CONFIG_' . $prop};
 	$val = ${'CONFIG_' . $prop};
-
-	/*
-  if (@constant($prop) !== NULL) {
-		$val = @constant($prop);
-	}
-  */
-  
-  return $val;
+	return $val;
 }
 
 if (!CONFIG('DEBUG')) {

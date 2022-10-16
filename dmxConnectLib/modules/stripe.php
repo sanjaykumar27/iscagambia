@@ -43,7 +43,7 @@ class stripe extends Module
     option_require($options, 'three_d_secure');
     $three_d_secure = $options->three_d_secure;
     unset($options->three_d_secure);
-    return $this->stripe->threeDSecure->retrieve($three_d_secure,$__extra)->toArray();
+    return $this->stripe->threeDSecure->retrieve($three_d_secure, json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
   // /v1/account_links - post
@@ -102,7 +102,7 @@ class stripe extends Module
     option_require($options, 'account');
     $account = $options->account;
     unset($options->account);
-    return $this->stripe->accounts->delete($account,$__extra)->toArray();
+    return $this->stripe->accounts->delete($account, json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
   // /v1/accounts/{account} - get
@@ -119,7 +119,7 @@ class stripe extends Module
     option_require($options, 'account');
     $account = $options->account;
     unset($options->account);
-    return $this->stripe->accounts->retrieve($account,$__extra)->toArray();
+    return $this->stripe->accounts->retrieve($account, json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
   // /v1/accounts/{account} - post
@@ -151,7 +151,9 @@ class stripe extends Module
     }
 
     option_require($options, 'account');
-    return $this->stripe->accounts->listCapabilities(json_decode(json_encode($options), true),$__extra)->toArray();
+    $account = $options->account;
+    unset($options->account);
+    return $this->stripe->accounts->listCapabilities($account, json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
   // /v1/accounts/{account}/capabilities/{capability} - get
@@ -171,7 +173,7 @@ class stripe extends Module
     option_require($options, 'capability');
     $capability = $options->capability;
     unset($options->capability);
-    return $this->stripe->accounts->retrieveCapabilitie($account, $capability,$__extra)->toArray();
+    return $this->stripe->accounts->retrieveCapabilitie($account, $capability, json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
   // /v1/accounts/{account}/capabilities/{capability} - post
@@ -206,7 +208,9 @@ class stripe extends Module
     }
 
     option_require($options, 'account');
-    return $this->stripe->accounts->listExternalAccounts(json_decode(json_encode($options), true),$__extra)->toArray();
+    $account = $options->account;
+    unset($options->account);
+    return $this->stripe->accounts->listExternalAccounts($account, json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
   // /v1/accounts/{account}/external_accounts - post
@@ -243,7 +247,7 @@ class stripe extends Module
     option_require($options, 'id');
     $id = $options->id;
     unset($options->id);
-    return $this->stripe->accounts->deleteExternalAccount($account, $id,$__extra)->toArray();
+    return $this->stripe->accounts->deleteExternalAccount($account, $id, json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
   // /v1/accounts/{account}/external_accounts/{id} - get
@@ -263,7 +267,7 @@ class stripe extends Module
     option_require($options, 'id');
     $id = $options->id;
     unset($options->id);
-    return $this->stripe->accounts->retrieveExternalAccount($account, $id,$__extra)->toArray();
+    return $this->stripe->accounts->retrieveExternalAccount($account, $id, json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
   // /v1/accounts/{account}/external_accounts/{id} - post
@@ -315,7 +319,9 @@ class stripe extends Module
     }
 
     option_require($options, 'account');
-    return $this->stripe->accounts->listPersons(json_decode(json_encode($options), true),$__extra)->toArray();
+    $account = $options->account;
+    unset($options->account);
+    return $this->stripe->accounts->listPersons($account, json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
   // /v1/accounts/{account}/persons - post
@@ -352,7 +358,7 @@ class stripe extends Module
     option_require($options, 'person');
     $person = $options->person;
     unset($options->person);
-    return $this->stripe->accounts->deletePerson($account, $person,$__extra)->toArray();
+    return $this->stripe->accounts->deletePerson($account, $person, json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
   // /v1/accounts/{account}/persons/{person} - get
@@ -372,7 +378,7 @@ class stripe extends Module
     option_require($options, 'person');
     $person = $options->person;
     unset($options->person);
-    return $this->stripe->accounts->retrievePerson($account, $person,$__extra)->toArray();
+    return $this->stripe->accounts->retrievePerson($account, $person, json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
   // /v1/accounts/{account}/persons/{person} - post
@@ -494,7 +500,7 @@ class stripe extends Module
     option_require($options, 'domain');
     $domain = $options->domain;
     unset($options->domain);
-    return $this->stripe->applePay->domains->delete($domain,$__extra)->toArray();
+    return $this->stripe->applePay->domains->delete($domain, json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
   // /v1/apple_pay/domains/{domain} - get
@@ -511,7 +517,7 @@ class stripe extends Module
     option_require($options, 'domain');
     $domain = $options->domain;
     unset($options->domain);
-    return $this->stripe->applePay->domains->retrieve($domain,$__extra)->toArray();
+    return $this->stripe->applePay->domains->retrieve($domain, json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
   // /v1/application_fees - get
@@ -545,7 +551,7 @@ class stripe extends Module
     option_require($options, 'id');
     $id = $options->id;
     unset($options->id);
-    return $this->stripe->applicationFees->retrieveRefund($fee, $id,$__extra)->toArray();
+    return $this->stripe->applicationFees->retrieveRefund($fee, $id, json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
   // /v1/application_fees/{fee}/refunds/{id} - post
@@ -582,7 +588,7 @@ class stripe extends Module
     option_require($options, 'id');
     $id = $options->id;
     unset($options->id);
-    return $this->stripe->applicationFees->retrieve($id,$__extra)->toArray();
+    return $this->stripe->applicationFees->retrieve($id, json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
   // /v1/application_fees/{id}/refunds - get
@@ -597,7 +603,9 @@ class stripe extends Module
     }
 
     option_require($options, 'id');
-    return $this->stripe->applicationFees->listRefunds(json_decode(json_encode($options), true),$__extra)->toArray();
+    $id = $options->id;
+    unset($options->id);
+    return $this->stripe->applicationFees->listRefunds($id, json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
   // /v1/application_fees/{id}/refunds - post
@@ -628,7 +636,7 @@ class stripe extends Module
       unset($options->__extra);
     }
 
-    return $this->stripe->balance->retrieve($__extra)->toArray();
+    return $this->stripe->balance->retrieve(json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
   // /v1/balance_transactions - get
@@ -659,7 +667,7 @@ class stripe extends Module
     option_require($options, 'id');
     $id = $options->id;
     unset($options->id);
-    return $this->stripe->balanceTransactions->retrieve($id,$__extra)->toArray();
+    return $this->stripe->balanceTransactions->retrieve($id, json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
   // /v1/billing_portal/configurations - get
@@ -704,7 +712,7 @@ class stripe extends Module
     option_require($options, 'configuration');
     $configuration = $options->configuration;
     unset($options->configuration);
-    return $this->stripe->billingPortal->configurations->retrieve($configuration,$__extra)->toArray();
+    return $this->stripe->billingPortal->configurations->retrieve($configuration, json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
   // /v1/billing_portal/configurations/{configuration} - post
@@ -766,7 +774,7 @@ class stripe extends Module
     option_require($options, 'id');
     $id = $options->id;
     unset($options->id);
-    return $this->stripe->bitcoin->receivers->retrieve($id,$__extra)->toArray();
+    return $this->stripe->bitcoin->receivers->retrieve($id, json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
   // /v1/bitcoin/receivers/{receiver}/transactions - get
@@ -781,7 +789,9 @@ class stripe extends Module
     }
 
     option_require($options, 'receiver');
-    return $this->stripe->bitcoin->receivers->listTransactions(json_decode(json_encode($options), true),$__extra)->toArray();
+    $receiver = $options->receiver;
+    unset($options->receiver);
+    return $this->stripe->bitcoin->receivers->listTransactions($receiver, json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
   // /v1/charges - get
@@ -812,6 +822,21 @@ class stripe extends Module
     return $this->stripe->charges->create(json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
+  // /v1/charges/search - get
+  public function searchCharges($options) {
+    $options = $this->app->parseObject($options, NULL, TRUE);
+    $__extra = isset($options->__extra) ? (array)$options->__extra : null;
+    if (isset($options->__extra)) {
+      if (count($__extra) == 0) {
+        $__extra = null;
+      }
+      unset($options->__extra);
+    }
+
+    option_require($options, 'query');
+    return $this->stripe->charges->search(json_decode(json_encode($options), true),$__extra)->toArray();
+  }
+
   // /v1/charges/{charge} - get
   public function retrieveCharge($options) {
     $options = $this->app->parseObject($options, NULL, TRUE);
@@ -826,7 +851,7 @@ class stripe extends Module
     option_require($options, 'charge');
     $charge = $options->charge;
     unset($options->charge);
-    return $this->stripe->charges->retrieve($charge,$__extra)->toArray();
+    return $this->stripe->charges->retrieve($charge, json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
   // /v1/charges/{charge} - post
@@ -875,7 +900,9 @@ class stripe extends Module
     }
 
     option_require($options, 'charge');
-    return $this->stripe->charges->listRefunds(json_decode(json_encode($options), true),$__extra)->toArray();
+    $charge = $options->charge;
+    unset($options->charge);
+    return $this->stripe->charges->listRefunds($charge, json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
   // /v1/charges/{charge}/refunds/{refund} - get
@@ -895,7 +922,7 @@ class stripe extends Module
     option_require($options, 'refund');
     $refund = $options->refund;
     unset($options->refund);
-    return $this->stripe->charges->retrieveRefund($charge, $refund,$__extra)->toArray();
+    return $this->stripe->charges->retrieveRefund($charge, $refund, json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
   // /v1/checkout/sessions - get
@@ -995,7 +1022,24 @@ class stripe extends Module
     option_require($options, 'session');
     $session = $options->session;
     unset($options->session);
-    return $this->stripe->checkout->sessions->retrieve($session,$__extra)->toArray();
+    return $this->stripe->checkout->sessions->retrieve($session, json_decode(json_encode($options), true),$__extra)->toArray();
+  }
+
+  // /v1/checkout/sessions/{session}/expire - post
+  public function expireCheckoutSession($options) {
+    $options = $this->app->parseObject($options, NULL, TRUE);
+    $__extra = isset($options->__extra) ? (array)$options->__extra : null;
+    if (isset($options->__extra)) {
+      if (count($__extra) == 0) {
+        $__extra = null;
+      }
+      unset($options->__extra);
+    }
+
+    option_require($options, 'session');
+    $session = $options->session;
+    unset($options->session);
+    return $this->stripe->checkout->sessions->expire($session, json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
   // /v1/checkout/sessions/{session}/line_items - get
@@ -1010,7 +1054,9 @@ class stripe extends Module
     }
 
     option_require($options, 'session');
-    return $this->stripe->checkout->sessions->listLineItems(json_decode(json_encode($options), true),$__extra)->toArray();
+    $session = $options->session;
+    unset($options->session);
+    return $this->stripe->checkout->sessions->listLineItems($session, json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
   // /v1/country_specs - get
@@ -1041,7 +1087,7 @@ class stripe extends Module
     option_require($options, 'country');
     $country = $options->country;
     unset($options->country);
-    return $this->stripe->countrySpecs->retrieve($country,$__extra)->toArray();
+    return $this->stripe->countrySpecs->retrieve($country, json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
   // /v1/coupons - get
@@ -1086,7 +1132,7 @@ class stripe extends Module
     option_require($options, 'coupon');
     $coupon = $options->coupon;
     unset($options->coupon);
-    return $this->stripe->coupons->delete($coupon,$__extra)->toArray();
+    return $this->stripe->coupons->delete($coupon, json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
   // /v1/coupons/{coupon} - get
@@ -1103,7 +1149,7 @@ class stripe extends Module
     option_require($options, 'coupon');
     $coupon = $options->coupon;
     unset($options->coupon);
-    return $this->stripe->coupons->retrieve($coupon,$__extra)->toArray();
+    return $this->stripe->coupons->retrieve($coupon, json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
   // /v1/coupons/{coupon} - post
@@ -1163,9 +1209,7 @@ class stripe extends Module
     }
 
     option_require($options, 'invoice');
-    $invoice = $options->invoice;
-    unset($options->invoice);
-    return $this->stripe->creditNotes->preview->retrieve($invoice, json_decode(json_encode($options), true),$__extra)->toArray();
+    return $this->stripe->creditNotes->preview(json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
   // /v1/credit_notes/preview/lines - get
@@ -1180,7 +1224,7 @@ class stripe extends Module
     }
 
     option_require($options, 'invoice');
-    return $this->stripe->creditNotes->preview->lines->all(json_decode(json_encode($options), true),$__extra)->toArray();
+    return $this->stripe->creditNotes->allCreditNoteLineItems(json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
   // /v1/credit_notes/{credit_note}/lines - get
@@ -1195,7 +1239,9 @@ class stripe extends Module
     }
 
     option_require($options, 'credit_note');
-    return $this->stripe->creditNotes->listLines(json_decode(json_encode($options), true),$__extra)->toArray();
+    $credit_note = $options->credit_note;
+    unset($options->credit_note);
+    return $this->stripe->creditNotes->listLines($credit_note, json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
   // /v1/credit_notes/{id} - get
@@ -1212,7 +1258,7 @@ class stripe extends Module
     option_require($options, 'id');
     $id = $options->id;
     unset($options->id);
-    return $this->stripe->creditNotes->retrieve($id,$__extra)->toArray();
+    return $this->stripe->creditNotes->retrieve($id, json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
   // /v1/credit_notes/{id} - post
@@ -1246,7 +1292,7 @@ class stripe extends Module
     option_require($options, 'id');
     $id = $options->id;
     unset($options->id);
-    return $this->stripe->creditNotes->void($id,$__extra)->toArray();
+    return $this->stripe->creditNotes->voidCreditNote($id, json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
   // /v1/customers - get
@@ -1277,6 +1323,21 @@ class stripe extends Module
     return $this->stripe->customers->create(json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
+  // /v1/customers/search - get
+  public function searchCustomers($options) {
+    $options = $this->app->parseObject($options, NULL, TRUE);
+    $__extra = isset($options->__extra) ? (array)$options->__extra : null;
+    if (isset($options->__extra)) {
+      if (count($__extra) == 0) {
+        $__extra = null;
+      }
+      unset($options->__extra);
+    }
+
+    option_require($options, 'query');
+    return $this->stripe->customers->search(json_decode(json_encode($options), true),$__extra)->toArray();
+  }
+
   // /v1/customers/{customer} - delete
   public function deleteCustomer($options) {
     $options = $this->app->parseObject($options, NULL, TRUE);
@@ -1291,7 +1352,7 @@ class stripe extends Module
     option_require($options, 'customer');
     $customer = $options->customer;
     unset($options->customer);
-    return $this->stripe->customers->delete($customer,$__extra)->toArray();
+    return $this->stripe->customers->delete($customer, json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
   // /v1/customers/{customer} - get
@@ -1308,7 +1369,7 @@ class stripe extends Module
     option_require($options, 'customer');
     $customer = $options->customer;
     unset($options->customer);
-    return $this->stripe->customers->retrieve($customer,$__extra)->toArray();
+    return $this->stripe->customers->retrieve($customer, json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
   // /v1/customers/{customer} - post
@@ -1340,7 +1401,9 @@ class stripe extends Module
     }
 
     option_require($options, 'customer');
-    return $this->stripe->customers->listBalanceTransactions(json_decode(json_encode($options), true),$__extra)->toArray();
+    $customer = $options->customer;
+    unset($options->customer);
+    return $this->stripe->customers->listBalanceTransactions($customer, json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
   // /v1/customers/{customer}/balance_transactions - post
@@ -1377,7 +1440,7 @@ class stripe extends Module
     option_require($options, 'transaction');
     $transaction = $options->transaction;
     unset($options->transaction);
-    return $this->stripe->customers->retrieveBalanceTransaction($customer, $transaction,$__extra)->toArray();
+    return $this->stripe->customers->retrieveBalanceTransaction($customer, $transaction, json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
   // /v1/customers/{customer}/balance_transactions/{transaction} - post
@@ -1400,6 +1463,40 @@ class stripe extends Module
     return $this->stripe->customers->updateBalanceTransaction($customer, $transaction, json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
+  // /v1/customers/{customer}/cash_balance - get
+  public function retrieveCustomerCashBalance($options) {
+    $options = $this->app->parseObject($options, NULL, TRUE);
+    $__extra = isset($options->__extra) ? (array)$options->__extra : null;
+    if (isset($options->__extra)) {
+      if (count($__extra) == 0) {
+        $__extra = null;
+      }
+      unset($options->__extra);
+    }
+
+    option_require($options, 'customer');
+    $customer = $options->customer;
+    unset($options->customer);
+    return $this->stripe->customers->retrieveCashBalance($customer, json_decode(json_encode($options), true),$__extra)->toArray();
+  }
+
+  // /v1/customers/{customer}/cash_balance - post
+  public function cashBalanceCustomer($options) {
+    $options = $this->app->parseObject($options, NULL, TRUE);
+    $__extra = isset($options->__extra) ? (array)$options->__extra : null;
+    if (isset($options->__extra)) {
+      if (count($__extra) == 0) {
+        $__extra = null;
+      }
+      unset($options->__extra);
+    }
+
+    option_require($options, 'customer');
+    $customer = $options->customer;
+    unset($options->customer);
+    return $this->stripe->customers->cashBalance($customer, json_decode(json_encode($options), true),$__extra)->toArray();
+  }
+
   // /v1/customers/{customer}/discount - delete
   public function deleteCustomerDiscount($options) {
     $options = $this->app->parseObject($options, NULL, TRUE);
@@ -1414,7 +1511,42 @@ class stripe extends Module
     option_require($options, 'customer');
     $customer = $options->customer;
     unset($options->customer);
-    return $this->stripe->customers->deleteDiscount($customer,$__extra)->toArray();
+    return $this->stripe->customers->deleteDiscount($customer, json_decode(json_encode($options), true),$__extra)->toArray();
+  }
+
+  // /v1/customers/{customer}/funding_instructions - post
+  public function createCustomerFundingInstruction($options) {
+    $options = $this->app->parseObject($options, NULL, TRUE);
+    $__extra = isset($options->__extra) ? (array)$options->__extra : null;
+    if (isset($options->__extra)) {
+      if (count($__extra) == 0) {
+        $__extra = null;
+      }
+      unset($options->__extra);
+    }
+
+    option_require($options, 'customer');
+    $customer = $options->customer;
+    unset($options->customer);
+    return $this->stripe->customers->createFundingInstruction($customer, json_decode(json_encode($options), true),$__extra)->toArray();
+  }
+
+  // /v1/customers/{customer}/payment_methods - get
+  public function listCustomerPaymentMethods($options) {
+    $options = $this->app->parseObject($options, NULL, TRUE);
+    $__extra = isset($options->__extra) ? (array)$options->__extra : null;
+    if (isset($options->__extra)) {
+      if (count($__extra) == 0) {
+        $__extra = null;
+      }
+      unset($options->__extra);
+    }
+
+    option_require($options, 'customer');
+    $customer = $options->customer;
+    unset($options->customer);
+    option_require($options, 'type');
+    return $this->stripe->customers->listPaymentMethods($customer, json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
   // /v1/customers/{customer}/sources - get
@@ -1429,7 +1561,9 @@ class stripe extends Module
     }
 
     option_require($options, 'customer');
-    return $this->stripe->customers->listSources(json_decode(json_encode($options), true),$__extra)->toArray();
+    $customer = $options->customer;
+    unset($options->customer);
+    return $this->stripe->customers->listSources($customer, json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
   // /v1/customers/{customer}/sources - post
@@ -1466,7 +1600,7 @@ class stripe extends Module
     option_require($options, 'id');
     $id = $options->id;
     unset($options->id);
-    return $this->stripe->customers->deleteSource($customer, $id,$__extra)->toArray();
+    return $this->stripe->customers->deleteSource($customer, $id, json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
   // /v1/customers/{customer}/sources/{id} - get
@@ -1486,7 +1620,7 @@ class stripe extends Module
     option_require($options, 'id');
     $id = $options->id;
     unset($options->id);
-    return $this->stripe->customers->retrieveSource($customer, $id,$__extra)->toArray();
+    return $this->stripe->customers->retrieveSource($customer, $id, json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
   // /v1/customers/{customer}/sources/{id} - post
@@ -1521,7 +1655,9 @@ class stripe extends Module
     }
 
     option_require($options, 'customer');
-    return $this->stripe->customers->listTaxIds(json_decode(json_encode($options), true),$__extra)->toArray();
+    $customer = $options->customer;
+    unset($options->customer);
+    return $this->stripe->customers->listTaxIds($customer, json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
   // /v1/customers/{customer}/tax_ids - post
@@ -1558,7 +1694,7 @@ class stripe extends Module
     option_require($options, 'id');
     $id = $options->id;
     unset($options->id);
-    return $this->stripe->customers->deleteTaxId($customer, $id,$__extra)->toArray();
+    return $this->stripe->customers->deleteTaxId($customer, $id, json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
   // /v1/customers/{customer}/tax_ids/{id} - get
@@ -1578,7 +1714,7 @@ class stripe extends Module
     option_require($options, 'id');
     $id = $options->id;
     unset($options->id);
-    return $this->stripe->customers->retrieveTaxId($customer, $id,$__extra)->toArray();
+    return $this->stripe->customers->retrieveTaxId($customer, $id, json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
   // /v1/customers/{customer}/x-stripeParametersOverride_bank_accounts/{id} - post
@@ -1649,7 +1785,7 @@ class stripe extends Module
     option_require($options, 'dispute');
     $dispute = $options->dispute;
     unset($options->dispute);
-    return $this->stripe->disputes->retrieve($dispute,$__extra)->toArray();
+    return $this->stripe->disputes->retrieve($dispute, json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
   // /v1/disputes/{dispute} - post
@@ -1683,7 +1819,7 @@ class stripe extends Module
     option_require($options, 'dispute');
     $dispute = $options->dispute;
     unset($options->dispute);
-    return $this->stripe->disputes->close($dispute,$__extra)->toArray();
+    return $this->stripe->disputes->close($dispute, json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
   // /v1/ephemeral_keys - post
@@ -1714,7 +1850,7 @@ class stripe extends Module
     option_require($options, 'key');
     $key = $options->key;
     unset($options->key);
-    return $this->stripe->ephemeralKeys->delete($key,$__extra)->toArray();
+    return $this->stripe->ephemeralKeys->delete($key, json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
   // /v1/events - get
@@ -1745,7 +1881,7 @@ class stripe extends Module
     option_require($options, 'id');
     $id = $options->id;
     unset($options->id);
-    return $this->stripe->events->retrieve($id,$__extra)->toArray();
+    return $this->stripe->events->retrieve($id, json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
   // /v1/exchange_rates - get
@@ -1776,7 +1912,7 @@ class stripe extends Module
     option_require($options, 'rate_id');
     $rate_id = $options->rate_id;
     unset($options->rate_id);
-    return $this->stripe->exchangeRates->retrieve($rate_id,$__extra)->toArray();
+    return $this->stripe->exchangeRates->retrieve($rate_id, json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
   // /v1/file_links - get
@@ -1821,7 +1957,7 @@ class stripe extends Module
     option_require($options, 'link');
     $link = $options->link;
     unset($options->link);
-    return $this->stripe->fileLinks->retrieve($link,$__extra)->toArray();
+    return $this->stripe->fileLinks->retrieve($link, json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
   // /v1/file_links/{link} - post
@@ -1883,7 +2019,89 @@ class stripe extends Module
     option_require($options, 'file');
     $file = $options->file;
     unset($options->file);
-    return $this->stripe->files->retrieve($file,$__extra)->toArray();
+    return $this->stripe->files->retrieve($file, json_decode(json_encode($options), true),$__extra)->toArray();
+  }
+
+  // /v1/financial_connections/accounts/{account} - get
+  public function retrieveFinancialConnectionsAccount($options) {
+    $options = $this->app->parseObject($options, NULL, TRUE);
+    $__extra = isset($options->__extra) ? (array)$options->__extra : null;
+    if (isset($options->__extra)) {
+      if (count($__extra) == 0) {
+        $__extra = null;
+      }
+      unset($options->__extra);
+    }
+
+    option_require($options, 'account');
+    $account = $options->account;
+    unset($options->account);
+    return $this->stripe->financialConnections->accounts->retrieve($account, json_decode(json_encode($options), true),$__extra)->toArray();
+  }
+
+  // /v1/financial_connections/accounts/{account}/disconnect - post
+  public function disconnectFinancialConnectionsAccount($options) {
+    $options = $this->app->parseObject($options, NULL, TRUE);
+    $__extra = isset($options->__extra) ? (array)$options->__extra : null;
+    if (isset($options->__extra)) {
+      if (count($__extra) == 0) {
+        $__extra = null;
+      }
+      unset($options->__extra);
+    }
+
+    option_require($options, 'account');
+    $account = $options->account;
+    unset($options->account);
+    return $this->stripe->financialConnections->accounts->disconnect($account, json_decode(json_encode($options), true),$__extra)->toArray();
+  }
+
+  // /v1/financial_connections/accounts/{account}/refresh - post
+  public function refreshFinancialConnectionsAccount($options) {
+    $options = $this->app->parseObject($options, NULL, TRUE);
+    $__extra = isset($options->__extra) ? (array)$options->__extra : null;
+    if (isset($options->__extra)) {
+      if (count($__extra) == 0) {
+        $__extra = null;
+      }
+      unset($options->__extra);
+    }
+
+    option_require($options, 'account');
+    $account = $options->account;
+    unset($options->account);
+    return $this->stripe->financialConnections->accounts->refresh($account, json_decode(json_encode($options), true),$__extra)->toArray();
+  }
+
+  // /v1/financial_connections/sessions - post
+  public function createFinancialConnectionsSession($options) {
+    $options = $this->app->parseObject($options, NULL, TRUE);
+    $__extra = isset($options->__extra) ? (array)$options->__extra : null;
+    if (isset($options->__extra)) {
+      if (count($__extra) == 0) {
+        $__extra = null;
+      }
+      unset($options->__extra);
+    }
+
+    return $this->stripe->financialConnections->sessions->create(json_decode(json_encode($options), true),$__extra)->toArray();
+  }
+
+  // /v1/financial_connections/sessions/{session} - get
+  public function retrieveFinancialConnectionsSession($options) {
+    $options = $this->app->parseObject($options, NULL, TRUE);
+    $__extra = isset($options->__extra) ? (array)$options->__extra : null;
+    if (isset($options->__extra)) {
+      if (count($__extra) == 0) {
+        $__extra = null;
+      }
+      unset($options->__extra);
+    }
+
+    option_require($options, 'session');
+    $session = $options->session;
+    unset($options->session);
+    return $this->stripe->financialConnections->sessions->retrieve($session, json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
   // /v1/identity/verification_reports - get
@@ -1914,7 +2132,7 @@ class stripe extends Module
     option_require($options, 'report');
     $report = $options->report;
     unset($options->report);
-    return $this->stripe->identity->verificationReports->retrieve($report,$__extra)->toArray();
+    return $this->stripe->identity->verificationReports->retrieve($report, json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
   // /v1/identity/verification_sessions - get
@@ -1959,7 +2177,7 @@ class stripe extends Module
     option_require($options, 'session');
     $session = $options->session;
     unset($options->session);
-    return $this->stripe->identity->verificationSessions->retrieve($session,$__extra)->toArray();
+    return $this->stripe->identity->verificationSessions->retrieve($session, json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
   // /v1/identity/verification_sessions/{session} - post
@@ -1993,7 +2211,7 @@ class stripe extends Module
     option_require($options, 'session');
     $session = $options->session;
     unset($options->session);
-    return $this->stripe->identity->verificationSessions->cancel($session,$__extra)->toArray();
+    return $this->stripe->identity->verificationSessions->cancel($session, json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
   // /v1/identity/verification_sessions/{session}/redact - post
@@ -2010,7 +2228,7 @@ class stripe extends Module
     option_require($options, 'session');
     $session = $options->session;
     unset($options->session);
-    return $this->stripe->identity->verificationSessions->redact($session,$__extra)->toArray();
+    return $this->stripe->identity->verificationSessions->redact($session, json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
   // /v1/invoiceitems - get
@@ -2055,7 +2273,7 @@ class stripe extends Module
     option_require($options, 'invoiceitem');
     $invoiceitem = $options->invoiceitem;
     unset($options->invoiceitem);
-    return $this->stripe->invoiceitems->delete($invoiceitem,$__extra)->toArray();
+    return $this->stripe->invoiceitems->delete($invoiceitem, json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
   // /v1/invoiceitems/{invoiceitem} - get
@@ -2072,7 +2290,7 @@ class stripe extends Module
     option_require($options, 'invoiceitem');
     $invoiceitem = $options->invoiceitem;
     unset($options->invoiceitem);
-    return $this->stripe->invoiceitems->retrieve($invoiceitem,$__extra)->toArray();
+    return $this->stripe->invoiceitems->retrieve($invoiceitem, json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
   // /v1/invoiceitems/{invoiceitem} - post
@@ -2120,6 +2338,21 @@ class stripe extends Module
     return $this->stripe->invoices->create(json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
+  // /v1/invoices/search - get
+  public function searchInvoices($options) {
+    $options = $this->app->parseObject($options, NULL, TRUE);
+    $__extra = isset($options->__extra) ? (array)$options->__extra : null;
+    if (isset($options->__extra)) {
+      if (count($__extra) == 0) {
+        $__extra = null;
+      }
+      unset($options->__extra);
+    }
+
+    option_require($options, 'query');
+    return $this->stripe->invoices->search(json_decode(json_encode($options), true),$__extra)->toArray();
+  }
+
   // /v1/invoices/upcoming - get
   public function retrieveInvoicesUpcoming($options) {
     $options = $this->app->parseObject($options, NULL, TRUE);
@@ -2131,7 +2364,7 @@ class stripe extends Module
       unset($options->__extra);
     }
 
-    return $this->stripe->invoices->upcoming->retrieve(json_decode(json_encode($options), true),$__extra)->toArray();
+    return $this->stripe->invoices->upcoming(json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
   // /v1/invoices/upcoming/lines - get
@@ -2145,7 +2378,7 @@ class stripe extends Module
       unset($options->__extra);
     }
 
-    return $this->stripe->invoices->upcoming->lines->all(json_decode(json_encode($options), true),$__extra)->toArray();
+    return $this->stripe->invoices->upcomingLines(json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
   // /v1/invoices/{invoice} - delete
@@ -2162,7 +2395,7 @@ class stripe extends Module
     option_require($options, 'invoice');
     $invoice = $options->invoice;
     unset($options->invoice);
-    return $this->stripe->invoices->delete($invoice,$__extra)->toArray();
+    return $this->stripe->invoices->delete($invoice, json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
   // /v1/invoices/{invoice} - get
@@ -2179,7 +2412,7 @@ class stripe extends Module
     option_require($options, 'invoice');
     $invoice = $options->invoice;
     unset($options->invoice);
-    return $this->stripe->invoices->retrieve($invoice,$__extra)->toArray();
+    return $this->stripe->invoices->retrieve($invoice, json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
   // /v1/invoices/{invoice} - post
@@ -2213,7 +2446,7 @@ class stripe extends Module
     option_require($options, 'invoice');
     $invoice = $options->invoice;
     unset($options->invoice);
-    return $this->stripe->invoices->finalize($invoice, json_decode(json_encode($options), true),$__extra)->toArray();
+    return $this->stripe->invoices->finalizeInvoice($invoice, json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
   // /v1/invoices/{invoice}/lines - get
@@ -2228,7 +2461,9 @@ class stripe extends Module
     }
 
     option_require($options, 'invoice');
-    return $this->stripe->invoices->listLines(json_decode(json_encode($options), true),$__extra)->toArray();
+    $invoice = $options->invoice;
+    unset($options->invoice);
+    return $this->stripe->invoices->listLines($invoice, json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
   // /v1/invoices/{invoice}/mark_uncollectible - post
@@ -2245,7 +2480,7 @@ class stripe extends Module
     option_require($options, 'invoice');
     $invoice = $options->invoice;
     unset($options->invoice);
-    return $this->stripe->invoices->markUncollectible($invoice,$__extra)->toArray();
+    return $this->stripe->invoices->markUncollectible($invoice, json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
   // /v1/invoices/{invoice}/pay - post
@@ -2279,7 +2514,7 @@ class stripe extends Module
     option_require($options, 'invoice');
     $invoice = $options->invoice;
     unset($options->invoice);
-    return $this->stripe->invoices->send($invoice,$__extra)->toArray();
+    return $this->stripe->invoices->sendInvoice($invoice, json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
   // /v1/invoices/{invoice}/void - post
@@ -2296,7 +2531,7 @@ class stripe extends Module
     option_require($options, 'invoice');
     $invoice = $options->invoice;
     unset($options->invoice);
-    return $this->stripe->invoices->void($invoice,$__extra)->toArray();
+    return $this->stripe->invoices->voidInvoice($invoice, json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
   // /v1/issuer_fraud_records - get
@@ -2327,7 +2562,7 @@ class stripe extends Module
     option_require($options, 'issuer_fraud_record');
     $issuer_fraud_record = $options->issuer_fraud_record;
     unset($options->issuer_fraud_record);
-    return $this->stripe->issuerFraudRecords->retrieve($issuer_fraud_record,$__extra)->toArray();
+    return $this->stripe->issuerFraudRecords->retrieve($issuer_fraud_record, json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
   // /v1/issuing/authorizations - get
@@ -2358,7 +2593,7 @@ class stripe extends Module
     option_require($options, 'authorization');
     $authorization = $options->authorization;
     unset($options->authorization);
-    return $this->stripe->issuing->authorizations->retrieve($authorization,$__extra)->toArray();
+    return $this->stripe->issuing->authorizations->retrieve($authorization, json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
   // /v1/issuing/authorizations/{authorization} - post
@@ -2454,7 +2689,7 @@ class stripe extends Module
     option_require($options, 'cardholder');
     $cardholder = $options->cardholder;
     unset($options->cardholder);
-    return $this->stripe->issuing->cardholders->retrieve($cardholder,$__extra)->toArray();
+    return $this->stripe->issuing->cardholders->retrieve($cardholder, json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
   // /v1/issuing/cardholders/{cardholder} - post
@@ -2516,7 +2751,7 @@ class stripe extends Module
     option_require($options, 'card');
     $card = $options->card;
     unset($options->card);
-    return $this->stripe->issuing->cards->retrieve($card,$__extra)->toArray();
+    return $this->stripe->issuing->cards->retrieve($card, json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
   // /v1/issuing/cards/{card} - post
@@ -2578,7 +2813,7 @@ class stripe extends Module
     option_require($options, 'dispute');
     $dispute = $options->dispute;
     unset($options->dispute);
-    return $this->stripe->issuing->disputes->retrieve($dispute,$__extra)->toArray();
+    return $this->stripe->issuing->disputes->retrieve($dispute, json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
   // /v1/issuing/disputes/{dispute} - post
@@ -2643,7 +2878,7 @@ class stripe extends Module
     option_require($options, 'transaction');
     $transaction = $options->transaction;
     unset($options->transaction);
-    return $this->stripe->issuing->transactions->retrieve($transaction,$__extra)->toArray();
+    return $this->stripe->issuing->transactions->retrieve($transaction, json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
   // /v1/issuing/transactions/{transaction} - post
@@ -2677,38 +2912,7 @@ class stripe extends Module
     option_require($options, 'mandate');
     $mandate = $options->mandate;
     unset($options->mandate);
-    return $this->stripe->mandates->retrieve($mandate,$__extra)->toArray();
-  }
-
-  // /v1/order_returns - get
-  public function listOrderReturns($options) {
-    $options = $this->app->parseObject($options, NULL, TRUE);
-    $__extra = isset($options->__extra) ? (array)$options->__extra : null;
-    if (isset($options->__extra)) {
-      if (count($__extra) == 0) {
-        $__extra = null;
-      }
-      unset($options->__extra);
-    }
-
-    return $this->stripe->orderReturns->all(json_decode(json_encode($options), true),$__extra)->toArray();
-  }
-
-  // /v1/order_returns/{id} - get
-  public function retrieveOrderReturn($options) {
-    $options = $this->app->parseObject($options, NULL, TRUE);
-    $__extra = isset($options->__extra) ? (array)$options->__extra : null;
-    if (isset($options->__extra)) {
-      if (count($__extra) == 0) {
-        $__extra = null;
-      }
-      unset($options->__extra);
-    }
-
-    option_require($options, 'id');
-    $id = $options->id;
-    unset($options->id);
-    return $this->stripe->orderReturns->retrieve($id,$__extra)->toArray();
+    return $this->stripe->mandates->retrieve($mandate, json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
   // /v1/orders - get
@@ -2753,7 +2957,7 @@ class stripe extends Module
     option_require($options, 'id');
     $id = $options->id;
     unset($options->id);
-    return $this->stripe->orders->retrieve($id,$__extra)->toArray();
+    return $this->stripe->orders->retrieve($id, json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
   // /v1/orders/{id} - post
@@ -2773,8 +2977,8 @@ class stripe extends Module
     return $this->stripe->orders->update($id, json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
-  // /v1/orders/{id}/pay - post
-  public function payOrder($options) {
+  // /v1/orders/{id}/cancel - post
+  public function cancelOrder($options) {
     $options = $this->app->parseObject($options, NULL, TRUE);
     $__extra = isset($options->__extra) ? (array)$options->__extra : null;
     if (isset($options->__extra)) {
@@ -2787,11 +2991,11 @@ class stripe extends Module
     option_require($options, 'id');
     $id = $options->id;
     unset($options->id);
-    return $this->stripe->orders->pay($id, json_decode(json_encode($options), true),$__extra)->toArray();
+    return $this->stripe->orders->cancel($id, json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
-  // /v1/orders/{id}/returns - post
-  public function createOrderReturn($options) {
+  // /v1/orders/{id}/line_items - get
+  public function listOrderLineItems($options) {
     $options = $this->app->parseObject($options, NULL, TRUE);
     $__extra = isset($options->__extra) ? (array)$options->__extra : null;
     if (isset($options->__extra)) {
@@ -2804,7 +3008,41 @@ class stripe extends Module
     option_require($options, 'id');
     $id = $options->id;
     unset($options->id);
-    return $this->stripe->orders->createReturn($id, json_decode(json_encode($options), true),$__extra)->toArray();
+    return $this->stripe->orders->listLineItems($id, json_decode(json_encode($options), true),$__extra)->toArray();
+  }
+
+  // /v1/orders/{id}/reopen - post
+  public function reopenOrder($options) {
+    $options = $this->app->parseObject($options, NULL, TRUE);
+    $__extra = isset($options->__extra) ? (array)$options->__extra : null;
+    if (isset($options->__extra)) {
+      if (count($__extra) == 0) {
+        $__extra = null;
+      }
+      unset($options->__extra);
+    }
+
+    option_require($options, 'id');
+    $id = $options->id;
+    unset($options->id);
+    return $this->stripe->orders->reopen($id, json_decode(json_encode($options), true),$__extra)->toArray();
+  }
+
+  // /v1/orders/{id}/submit - post
+  public function submitOrder($options) {
+    $options = $this->app->parseObject($options, NULL, TRUE);
+    $__extra = isset($options->__extra) ? (array)$options->__extra : null;
+    if (isset($options->__extra)) {
+      if (count($__extra) == 0) {
+        $__extra = null;
+      }
+      unset($options->__extra);
+    }
+
+    option_require($options, 'id');
+    $id = $options->id;
+    unset($options->id);
+    return $this->stripe->orders->submit($id, json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
   // /v1/payment_intents - get
@@ -2833,6 +3071,21 @@ class stripe extends Module
     }
 
     return $this->stripe->paymentIntents->create(json_decode(json_encode($options), true),$__extra)->toArray();
+  }
+
+  // /v1/payment_intents/search - get
+  public function searchPaymentIntents($options) {
+    $options = $this->app->parseObject($options, NULL, TRUE);
+    $__extra = isset($options->__extra) ? (array)$options->__extra : null;
+    if (isset($options->__extra)) {
+      if (count($__extra) == 0) {
+        $__extra = null;
+      }
+      unset($options->__extra);
+    }
+
+    option_require($options, 'query');
+    return $this->stripe->paymentIntents->search(json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
   // /v1/payment_intents/{intent} - get
@@ -2867,6 +3120,23 @@ class stripe extends Module
     $intent = $options->intent;
     unset($options->intent);
     return $this->stripe->paymentIntents->update($intent, json_decode(json_encode($options), true),$__extra)->toArray();
+  }
+
+  // /v1/payment_intents/{intent}/apply_customer_balance - post
+  public function applyCustomerBalancePaymentIntent($options) {
+    $options = $this->app->parseObject($options, NULL, TRUE);
+    $__extra = isset($options->__extra) ? (array)$options->__extra : null;
+    if (isset($options->__extra)) {
+      if (count($__extra) == 0) {
+        $__extra = null;
+      }
+      unset($options->__extra);
+    }
+
+    option_require($options, 'intent');
+    $intent = $options->intent;
+    unset($options->intent);
+    return $this->stripe->paymentIntents->applyCustomerBalance($intent, json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
   // /v1/payment_intents/{intent}/cancel - post
@@ -2920,6 +3190,119 @@ class stripe extends Module
     return $this->stripe->paymentIntents->confirm($intent, json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
+  // /v1/payment_intents/{intent}/increment_authorization - post
+  public function incrementAuthorizationPaymentIntent($options) {
+    $options = $this->app->parseObject($options, NULL, TRUE);
+    $__extra = isset($options->__extra) ? (array)$options->__extra : null;
+    if (isset($options->__extra)) {
+      if (count($__extra) == 0) {
+        $__extra = null;
+      }
+      unset($options->__extra);
+    }
+
+    option_require($options, 'intent');
+    $intent = $options->intent;
+    unset($options->intent);
+    return $this->stripe->paymentIntents->incrementAuthorization($intent, json_decode(json_encode($options), true),$__extra)->toArray();
+  }
+
+  // /v1/payment_intents/{intent}/verify_microdeposits - post
+  public function createPaymentIntentVerifyMicrodeposit($options) {
+    $options = $this->app->parseObject($options, NULL, TRUE);
+    $__extra = isset($options->__extra) ? (array)$options->__extra : null;
+    if (isset($options->__extra)) {
+      if (count($__extra) == 0) {
+        $__extra = null;
+      }
+      unset($options->__extra);
+    }
+
+    option_require($options, 'intent');
+    $intent = $options->intent;
+    unset($options->intent);
+    return $this->stripe->paymentIntents->createVerifyMicrodeposit($intent, json_decode(json_encode($options), true),$__extra)->toArray();
+  }
+
+  // /v1/payment_links - get
+  public function listPaymentLinks($options) {
+    $options = $this->app->parseObject($options, NULL, TRUE);
+    $__extra = isset($options->__extra) ? (array)$options->__extra : null;
+    if (isset($options->__extra)) {
+      if (count($__extra) == 0) {
+        $__extra = null;
+      }
+      unset($options->__extra);
+    }
+
+    return $this->stripe->paymentLinks->all(json_decode(json_encode($options), true),$__extra)->toArray();
+  }
+
+  // /v1/payment_links - post
+  public function createPaymentLink($options) {
+    $options = $this->app->parseObject($options, NULL, TRUE);
+    $__extra = isset($options->__extra) ? (array)$options->__extra : null;
+    if (isset($options->__extra)) {
+      if (count($__extra) == 0) {
+        $__extra = null;
+      }
+      unset($options->__extra);
+    }
+
+    return $this->stripe->paymentLinks->create(json_decode(json_encode($options), true),$__extra)->toArray();
+  }
+
+  // /v1/payment_links/{payment_link} - get
+  public function retrievePaymentLink($options) {
+    $options = $this->app->parseObject($options, NULL, TRUE);
+    $__extra = isset($options->__extra) ? (array)$options->__extra : null;
+    if (isset($options->__extra)) {
+      if (count($__extra) == 0) {
+        $__extra = null;
+      }
+      unset($options->__extra);
+    }
+
+    option_require($options, 'payment_link');
+    $payment_link = $options->payment_link;
+    unset($options->payment_link);
+    return $this->stripe->paymentLinks->retrieve($payment_link, json_decode(json_encode($options), true),$__extra)->toArray();
+  }
+
+  // /v1/payment_links/{payment_link} - post
+  public function updatePaymentLink($options) {
+    $options = $this->app->parseObject($options, NULL, TRUE);
+    $__extra = isset($options->__extra) ? (array)$options->__extra : null;
+    if (isset($options->__extra)) {
+      if (count($__extra) == 0) {
+        $__extra = null;
+      }
+      unset($options->__extra);
+    }
+
+    option_require($options, 'payment_link');
+    $payment_link = $options->payment_link;
+    unset($options->payment_link);
+    return $this->stripe->paymentLinks->update($payment_link, json_decode(json_encode($options), true),$__extra)->toArray();
+  }
+
+  // /v1/payment_links/{payment_link}/line_items - get
+  public function listPaymentLinkLineItems($options) {
+    $options = $this->app->parseObject($options, NULL, TRUE);
+    $__extra = isset($options->__extra) ? (array)$options->__extra : null;
+    if (isset($options->__extra)) {
+      if (count($__extra) == 0) {
+        $__extra = null;
+      }
+      unset($options->__extra);
+    }
+
+    option_require($options, 'payment_link');
+    $payment_link = $options->payment_link;
+    unset($options->payment_link);
+    return $this->stripe->paymentLinks->listLineItems($payment_link, json_decode(json_encode($options), true),$__extra)->toArray();
+  }
+
   // /v1/payment_methods - get
   public function listPaymentMethods($options) {
     $options = $this->app->parseObject($options, NULL, TRUE);
@@ -2931,7 +3314,6 @@ class stripe extends Module
       unset($options->__extra);
     }
 
-    option_require($options, 'customer');
     option_require($options, 'type');
     return $this->stripe->paymentMethods->all(json_decode(json_encode($options), true),$__extra)->toArray();
   }
@@ -2964,7 +3346,7 @@ class stripe extends Module
     option_require($options, 'payment_method');
     $payment_method = $options->payment_method;
     unset($options->payment_method);
-    return $this->stripe->paymentMethods->retrieve($payment_method,$__extra)->toArray();
+    return $this->stripe->paymentMethods->retrieve($payment_method, json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
   // /v1/payment_methods/{payment_method} - post
@@ -3015,7 +3397,7 @@ class stripe extends Module
     option_require($options, 'payment_method');
     $payment_method = $options->payment_method;
     unset($options->payment_method);
-    return $this->stripe->paymentMethods->detach($payment_method,$__extra)->toArray();
+    return $this->stripe->paymentMethods->detach($payment_method, json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
   // /v1/payouts - get
@@ -3060,7 +3442,7 @@ class stripe extends Module
     option_require($options, 'payout');
     $payout = $options->payout;
     unset($options->payout);
-    return $this->stripe->payouts->retrieve($payout,$__extra)->toArray();
+    return $this->stripe->payouts->retrieve($payout, json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
   // /v1/payouts/{payout} - post
@@ -3094,7 +3476,7 @@ class stripe extends Module
     option_require($options, 'payout');
     $payout = $options->payout;
     unset($options->payout);
-    return $this->stripe->payouts->cancel($payout,$__extra)->toArray();
+    return $this->stripe->payouts->cancel($payout, json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
   // /v1/payouts/{payout}/reverse - post
@@ -3156,7 +3538,7 @@ class stripe extends Module
     option_require($options, 'plan');
     $plan = $options->plan;
     unset($options->plan);
-    return $this->stripe->plans->delete($plan,$__extra)->toArray();
+    return $this->stripe->plans->delete($plan, json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
   // /v1/plans/{plan} - get
@@ -3173,7 +3555,7 @@ class stripe extends Module
     option_require($options, 'plan');
     $plan = $options->plan;
     unset($options->plan);
-    return $this->stripe->plans->retrieve($plan,$__extra)->toArray();
+    return $this->stripe->plans->retrieve($plan, json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
   // /v1/plans/{plan} - post
@@ -3221,6 +3603,21 @@ class stripe extends Module
     return $this->stripe->prices->create(json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
+  // /v1/prices/search - get
+  public function searchPrices($options) {
+    $options = $this->app->parseObject($options, NULL, TRUE);
+    $__extra = isset($options->__extra) ? (array)$options->__extra : null;
+    if (isset($options->__extra)) {
+      if (count($__extra) == 0) {
+        $__extra = null;
+      }
+      unset($options->__extra);
+    }
+
+    option_require($options, 'query');
+    return $this->stripe->prices->search(json_decode(json_encode($options), true),$__extra)->toArray();
+  }
+
   // /v1/prices/{price} - get
   public function retrievePrice($options) {
     $options = $this->app->parseObject($options, NULL, TRUE);
@@ -3235,7 +3632,7 @@ class stripe extends Module
     option_require($options, 'price');
     $price = $options->price;
     unset($options->price);
-    return $this->stripe->prices->retrieve($price,$__extra)->toArray();
+    return $this->stripe->prices->retrieve($price, json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
   // /v1/prices/{price} - post
@@ -3283,6 +3680,21 @@ class stripe extends Module
     return $this->stripe->products->create(json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
+  // /v1/products/search - get
+  public function searchProducts($options) {
+    $options = $this->app->parseObject($options, NULL, TRUE);
+    $__extra = isset($options->__extra) ? (array)$options->__extra : null;
+    if (isset($options->__extra)) {
+      if (count($__extra) == 0) {
+        $__extra = null;
+      }
+      unset($options->__extra);
+    }
+
+    option_require($options, 'query');
+    return $this->stripe->products->search(json_decode(json_encode($options), true),$__extra)->toArray();
+  }
+
   // /v1/products/{id} - delete
   public function deleteProduct($options) {
     $options = $this->app->parseObject($options, NULL, TRUE);
@@ -3297,7 +3709,7 @@ class stripe extends Module
     option_require($options, 'id');
     $id = $options->id;
     unset($options->id);
-    return $this->stripe->products->delete($id,$__extra)->toArray();
+    return $this->stripe->products->delete($id, json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
   // /v1/products/{id} - get
@@ -3314,7 +3726,7 @@ class stripe extends Module
     option_require($options, 'id');
     $id = $options->id;
     unset($options->id);
-    return $this->stripe->products->retrieve($id,$__extra)->toArray();
+    return $this->stripe->products->retrieve($id, json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
   // /v1/products/{id} - post
@@ -3376,7 +3788,7 @@ class stripe extends Module
     option_require($options, 'promotion_code');
     $promotion_code = $options->promotion_code;
     unset($options->promotion_code);
-    return $this->stripe->promotionCodes->retrieve($promotion_code,$__extra)->toArray();
+    return $this->stripe->promotionCodes->retrieve($promotion_code, json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
   // /v1/promotion_codes/{promotion_code} - post
@@ -3394,6 +3806,170 @@ class stripe extends Module
     $promotion_code = $options->promotion_code;
     unset($options->promotion_code);
     return $this->stripe->promotionCodes->update($promotion_code, json_decode(json_encode($options), true),$__extra)->toArray();
+  }
+
+  // /v1/quotes - get
+  public function listQuotes($options) {
+    $options = $this->app->parseObject($options, NULL, TRUE);
+    $__extra = isset($options->__extra) ? (array)$options->__extra : null;
+    if (isset($options->__extra)) {
+      if (count($__extra) == 0) {
+        $__extra = null;
+      }
+      unset($options->__extra);
+    }
+
+    return $this->stripe->quotes->all(json_decode(json_encode($options), true),$__extra)->toArray();
+  }
+
+  // /v1/quotes - post
+  public function createQuote($options) {
+    $options = $this->app->parseObject($options, NULL, TRUE);
+    $__extra = isset($options->__extra) ? (array)$options->__extra : null;
+    if (isset($options->__extra)) {
+      if (count($__extra) == 0) {
+        $__extra = null;
+      }
+      unset($options->__extra);
+    }
+
+    return $this->stripe->quotes->create(json_decode(json_encode($options), true),$__extra)->toArray();
+  }
+
+  // /v1/quotes/{quote} - get
+  public function retrieveQuote($options) {
+    $options = $this->app->parseObject($options, NULL, TRUE);
+    $__extra = isset($options->__extra) ? (array)$options->__extra : null;
+    if (isset($options->__extra)) {
+      if (count($__extra) == 0) {
+        $__extra = null;
+      }
+      unset($options->__extra);
+    }
+
+    option_require($options, 'quote');
+    $quote = $options->quote;
+    unset($options->quote);
+    return $this->stripe->quotes->retrieve($quote, json_decode(json_encode($options), true),$__extra)->toArray();
+  }
+
+  // /v1/quotes/{quote} - post
+  public function updateQuote($options) {
+    $options = $this->app->parseObject($options, NULL, TRUE);
+    $__extra = isset($options->__extra) ? (array)$options->__extra : null;
+    if (isset($options->__extra)) {
+      if (count($__extra) == 0) {
+        $__extra = null;
+      }
+      unset($options->__extra);
+    }
+
+    option_require($options, 'quote');
+    $quote = $options->quote;
+    unset($options->quote);
+    return $this->stripe->quotes->update($quote, json_decode(json_encode($options), true),$__extra)->toArray();
+  }
+
+  // /v1/quotes/{quote}/accept - post
+  public function acceptQuote($options) {
+    $options = $this->app->parseObject($options, NULL, TRUE);
+    $__extra = isset($options->__extra) ? (array)$options->__extra : null;
+    if (isset($options->__extra)) {
+      if (count($__extra) == 0) {
+        $__extra = null;
+      }
+      unset($options->__extra);
+    }
+
+    option_require($options, 'quote');
+    $quote = $options->quote;
+    unset($options->quote);
+    return $this->stripe->quotes->accept($quote, json_decode(json_encode($options), true),$__extra)->toArray();
+  }
+
+  // /v1/quotes/{quote}/cancel - post
+  public function cancelQuote($options) {
+    $options = $this->app->parseObject($options, NULL, TRUE);
+    $__extra = isset($options->__extra) ? (array)$options->__extra : null;
+    if (isset($options->__extra)) {
+      if (count($__extra) == 0) {
+        $__extra = null;
+      }
+      unset($options->__extra);
+    }
+
+    option_require($options, 'quote');
+    $quote = $options->quote;
+    unset($options->quote);
+    return $this->stripe->quotes->cancel($quote, json_decode(json_encode($options), true),$__extra)->toArray();
+  }
+
+  // /v1/quotes/{quote}/computed_upfront_line_items - get
+  public function listQuoteComputedUpfrontLineItems($options) {
+    $options = $this->app->parseObject($options, NULL, TRUE);
+    $__extra = isset($options->__extra) ? (array)$options->__extra : null;
+    if (isset($options->__extra)) {
+      if (count($__extra) == 0) {
+        $__extra = null;
+      }
+      unset($options->__extra);
+    }
+
+    option_require($options, 'quote');
+    $quote = $options->quote;
+    unset($options->quote);
+    return $this->stripe->quotes->listComputedUpfrontLineItems($quote, json_decode(json_encode($options), true),$__extra)->toArray();
+  }
+
+  // /v1/quotes/{quote}/finalize - post
+  public function finalizeQuote($options) {
+    $options = $this->app->parseObject($options, NULL, TRUE);
+    $__extra = isset($options->__extra) ? (array)$options->__extra : null;
+    if (isset($options->__extra)) {
+      if (count($__extra) == 0) {
+        $__extra = null;
+      }
+      unset($options->__extra);
+    }
+
+    option_require($options, 'quote');
+    $quote = $options->quote;
+    unset($options->quote);
+    return $this->stripe->quotes->finalizeQuote($quote, json_decode(json_encode($options), true),$__extra)->toArray();
+  }
+
+  // /v1/quotes/{quote}/line_items - get
+  public function listQuoteLineItems($options) {
+    $options = $this->app->parseObject($options, NULL, TRUE);
+    $__extra = isset($options->__extra) ? (array)$options->__extra : null;
+    if (isset($options->__extra)) {
+      if (count($__extra) == 0) {
+        $__extra = null;
+      }
+      unset($options->__extra);
+    }
+
+    option_require($options, 'quote');
+    $quote = $options->quote;
+    unset($options->quote);
+    return $this->stripe->quotes->listLineItems($quote, json_decode(json_encode($options), true),$__extra)->toArray();
+  }
+
+  // /v1/quotes/{quote}/pdf - get
+  public function retrieveQuotePdf($options) {
+    $options = $this->app->parseObject($options, NULL, TRUE);
+    $__extra = isset($options->__extra) ? (array)$options->__extra : null;
+    if (isset($options->__extra)) {
+      if (count($__extra) == 0) {
+        $__extra = null;
+      }
+      unset($options->__extra);
+    }
+
+    option_require($options, 'quote');
+    $quote = $options->quote;
+    unset($options->quote);
+    return $this->stripe->quotes->retrievePdf($quote, json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
   // /v1/radar/early_fraud_warnings - get
@@ -3424,7 +4000,7 @@ class stripe extends Module
     option_require($options, 'early_fraud_warning');
     $early_fraud_warning = $options->early_fraud_warning;
     unset($options->early_fraud_warning);
-    return $this->stripe->radar->earlyFraudWarnings->retrieve($early_fraud_warning,$__extra)->toArray();
+    return $this->stripe->radar->earlyFraudWarnings->retrieve($early_fraud_warning, json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
   // /v1/radar/value_list_items - get
@@ -3470,7 +4046,7 @@ class stripe extends Module
     option_require($options, 'item');
     $item = $options->item;
     unset($options->item);
-    return $this->stripe->radar->valueListItems->delete($item,$__extra)->toArray();
+    return $this->stripe->radar->valueListItems->delete($item, json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
   // /v1/radar/value_list_items/{item} - get
@@ -3487,7 +4063,7 @@ class stripe extends Module
     option_require($options, 'item');
     $item = $options->item;
     unset($options->item);
-    return $this->stripe->radar->valueListItems->retrieve($item,$__extra)->toArray();
+    return $this->stripe->radar->valueListItems->retrieve($item, json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
   // /v1/radar/value_lists - get
@@ -3532,7 +4108,7 @@ class stripe extends Module
     option_require($options, 'value_list');
     $value_list = $options->value_list;
     unset($options->value_list);
-    return $this->stripe->radar->valueLists->delete($value_list,$__extra)->toArray();
+    return $this->stripe->radar->valueLists->delete($value_list, json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
   // /v1/radar/value_lists/{value_list} - get
@@ -3549,7 +4125,7 @@ class stripe extends Module
     option_require($options, 'value_list');
     $value_list = $options->value_list;
     unset($options->value_list);
-    return $this->stripe->radar->valueLists->retrieve($value_list,$__extra)->toArray();
+    return $this->stripe->radar->valueLists->retrieve($value_list, json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
   // /v1/radar/value_lists/{value_list} - post
@@ -3611,7 +4187,7 @@ class stripe extends Module
     option_require($options, 'id');
     $id = $options->id;
     unset($options->id);
-    return $this->stripe->recipients->delete($id,$__extra)->toArray();
+    return $this->stripe->recipients->delete($id, json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
   // /v1/recipients/{id} - get
@@ -3628,7 +4204,7 @@ class stripe extends Module
     option_require($options, 'id');
     $id = $options->id;
     unset($options->id);
-    return $this->stripe->recipients->retrieve($id,$__extra)->toArray();
+    return $this->stripe->recipients->retrieve($id, json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
   // /v1/recipients/{id} - post
@@ -3690,7 +4266,7 @@ class stripe extends Module
     option_require($options, 'refund');
     $refund = $options->refund;
     unset($options->refund);
-    return $this->stripe->refunds->retrieve($refund,$__extra)->toArray();
+    return $this->stripe->refunds->retrieve($refund, json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
   // /v1/refunds/{refund} - post
@@ -3708,6 +4284,23 @@ class stripe extends Module
     $refund = $options->refund;
     unset($options->refund);
     return $this->stripe->refunds->update($refund, json_decode(json_encode($options), true),$__extra)->toArray();
+  }
+
+  // /v1/refunds/{refund}/cancel - post
+  public function cancelRefund($options) {
+    $options = $this->app->parseObject($options, NULL, TRUE);
+    $__extra = isset($options->__extra) ? (array)$options->__extra : null;
+    if (isset($options->__extra)) {
+      if (count($__extra) == 0) {
+        $__extra = null;
+      }
+      unset($options->__extra);
+    }
+
+    option_require($options, 'refund');
+    $refund = $options->refund;
+    unset($options->refund);
+    return $this->stripe->refunds->cancel($refund, json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
   // /v1/reporting/report_runs - get
@@ -3752,7 +4345,7 @@ class stripe extends Module
     option_require($options, 'report_run');
     $report_run = $options->report_run;
     unset($options->report_run);
-    return $this->stripe->reporting->reportRuns->retrieve($report_run,$__extra)->toArray();
+    return $this->stripe->reporting->reportRuns->retrieve($report_run, json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
   // /v1/reporting/report_types - get
@@ -3783,7 +4376,7 @@ class stripe extends Module
     option_require($options, 'report_type');
     $report_type = $options->report_type;
     unset($options->report_type);
-    return $this->stripe->reporting->reportTypes->retrieve($report_type,$__extra)->toArray();
+    return $this->stripe->reporting->reportTypes->retrieve($report_type, json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
   // /v1/reviews - get
@@ -3814,7 +4407,7 @@ class stripe extends Module
     option_require($options, 'review');
     $review = $options->review;
     unset($options->review);
-    return $this->stripe->reviews->retrieve($review,$__extra)->toArray();
+    return $this->stripe->reviews->retrieve($review, json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
   // /v1/reviews/{review}/approve - post
@@ -3831,7 +4424,7 @@ class stripe extends Module
     option_require($options, 'review');
     $review = $options->review;
     unset($options->review);
-    return $this->stripe->reviews->approve($review,$__extra)->toArray();
+    return $this->stripe->reviews->approve($review, json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
   // /v1/setup_attempts - get
@@ -3945,6 +4538,85 @@ class stripe extends Module
     return $this->stripe->setupIntents->confirm($intent, json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
+  // /v1/setup_intents/{intent}/verify_microdeposits - post
+  public function createSetupIntentVerifyMicrodeposit($options) {
+    $options = $this->app->parseObject($options, NULL, TRUE);
+    $__extra = isset($options->__extra) ? (array)$options->__extra : null;
+    if (isset($options->__extra)) {
+      if (count($__extra) == 0) {
+        $__extra = null;
+      }
+      unset($options->__extra);
+    }
+
+    option_require($options, 'intent');
+    $intent = $options->intent;
+    unset($options->intent);
+    return $this->stripe->setupIntents->createVerifyMicrodeposit($intent, json_decode(json_encode($options), true),$__extra)->toArray();
+  }
+
+  // /v1/shipping_rates - get
+  public function listShippingRates($options) {
+    $options = $this->app->parseObject($options, NULL, TRUE);
+    $__extra = isset($options->__extra) ? (array)$options->__extra : null;
+    if (isset($options->__extra)) {
+      if (count($__extra) == 0) {
+        $__extra = null;
+      }
+      unset($options->__extra);
+    }
+
+    return $this->stripe->shippingRates->all(json_decode(json_encode($options), true),$__extra)->toArray();
+  }
+
+  // /v1/shipping_rates - post
+  public function createShippingRate($options) {
+    $options = $this->app->parseObject($options, NULL, TRUE);
+    $__extra = isset($options->__extra) ? (array)$options->__extra : null;
+    if (isset($options->__extra)) {
+      if (count($__extra) == 0) {
+        $__extra = null;
+      }
+      unset($options->__extra);
+    }
+
+    return $this->stripe->shippingRates->create(json_decode(json_encode($options), true),$__extra)->toArray();
+  }
+
+  // /v1/shipping_rates/{shipping_rate_token} - get
+  public function retrieveShippingRate($options) {
+    $options = $this->app->parseObject($options, NULL, TRUE);
+    $__extra = isset($options->__extra) ? (array)$options->__extra : null;
+    if (isset($options->__extra)) {
+      if (count($__extra) == 0) {
+        $__extra = null;
+      }
+      unset($options->__extra);
+    }
+
+    option_require($options, 'shipping_rate_token');
+    $shipping_rate_token = $options->shipping_rate_token;
+    unset($options->shipping_rate_token);
+    return $this->stripe->shippingRates->retrieve($shipping_rate_token, json_decode(json_encode($options), true),$__extra)->toArray();
+  }
+
+  // /v1/shipping_rates/{shipping_rate_token} - post
+  public function updateShippingRate($options) {
+    $options = $this->app->parseObject($options, NULL, TRUE);
+    $__extra = isset($options->__extra) ? (array)$options->__extra : null;
+    if (isset($options->__extra)) {
+      if (count($__extra) == 0) {
+        $__extra = null;
+      }
+      unset($options->__extra);
+    }
+
+    option_require($options, 'shipping_rate_token');
+    $shipping_rate_token = $options->shipping_rate_token;
+    unset($options->shipping_rate_token);
+    return $this->stripe->shippingRates->update($shipping_rate_token, json_decode(json_encode($options), true),$__extra)->toArray();
+  }
+
   // /v1/sigma/scheduled_query_runs - get
   public function listSigmaScheduledQueryRuns($options) {
     $options = $this->app->parseObject($options, NULL, TRUE);
@@ -3973,7 +4645,7 @@ class stripe extends Module
     option_require($options, 'scheduled_query_run');
     $scheduled_query_run = $options->scheduled_query_run;
     unset($options->scheduled_query_run);
-    return $this->stripe->sigma->scheduledQueryRuns->retrieve($scheduled_query_run,$__extra)->toArray();
+    return $this->stripe->sigma->scheduledQueryRuns->retrieve($scheduled_query_run, json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
   // /v1/skus - get
@@ -4018,7 +4690,7 @@ class stripe extends Module
     option_require($options, 'id');
     $id = $options->id;
     unset($options->id);
-    return $this->stripe->skus->delete($id,$__extra)->toArray();
+    return $this->stripe->skus->delete($id, json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
   // /v1/skus/{id} - get
@@ -4035,7 +4707,7 @@ class stripe extends Module
     option_require($options, 'id');
     $id = $options->id;
     unset($options->id);
-    return $this->stripe->skus->retrieve($id,$__extra)->toArray();
+    return $this->stripe->skus->retrieve($id, json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
   // /v1/skus/{id} - post
@@ -4115,7 +4787,9 @@ class stripe extends Module
     }
 
     option_require($options, 'source');
-    return $this->stripe->sources->listSourceTransactions(json_decode(json_encode($options), true),$__extra)->toArray();
+    $source = $options->source;
+    unset($options->source);
+    return $this->stripe->sources->listSourceTransactions($source, json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
   // /v1/sources/{source}/verify - post
@@ -4195,7 +4869,7 @@ class stripe extends Module
     option_require($options, 'item');
     $item = $options->item;
     unset($options->item);
-    return $this->stripe->subscriptionItems->retrieve($item,$__extra)->toArray();
+    return $this->stripe->subscriptionItems->retrieve($item, json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
   // /v1/subscription_items/{item} - post
@@ -4227,7 +4901,9 @@ class stripe extends Module
     }
 
     option_require($options, 'subscription_item');
-    return $this->stripe->subscriptionItems->listUsageRecordSummaries(json_decode(json_encode($options), true),$__extra)->toArray();
+    $subscription_item = $options->subscription_item;
+    unset($options->subscription_item);
+    return $this->stripe->subscriptionItems->listUsageRecordSummaries($subscription_item, json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
   // /v1/subscription_items/{subscription_item}/usage_records - post
@@ -4289,7 +4965,7 @@ class stripe extends Module
     option_require($options, 'schedule');
     $schedule = $options->schedule;
     unset($options->schedule);
-    return $this->stripe->subscriptionSchedules->retrieve($schedule,$__extra)->toArray();
+    return $this->stripe->subscriptionSchedules->retrieve($schedule, json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
   // /v1/subscription_schedules/{schedule} - post
@@ -4371,6 +5047,21 @@ class stripe extends Module
     return $this->stripe->subscriptions->create(json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
+  // /v1/subscriptions/search - get
+  public function searchSubscriptions($options) {
+    $options = $this->app->parseObject($options, NULL, TRUE);
+    $__extra = isset($options->__extra) ? (array)$options->__extra : null;
+    if (isset($options->__extra)) {
+      if (count($__extra) == 0) {
+        $__extra = null;
+      }
+      unset($options->__extra);
+    }
+
+    option_require($options, 'query');
+    return $this->stripe->subscriptions->search(json_decode(json_encode($options), true),$__extra)->toArray();
+  }
+
   // /v1/subscriptions/{subscription_exposed_id} - delete
   public function deleteSubscription($options) {
     $options = $this->app->parseObject($options, NULL, TRUE);
@@ -4402,7 +5093,7 @@ class stripe extends Module
     option_require($options, 'subscription_exposed_id');
     $subscription_exposed_id = $options->subscription_exposed_id;
     unset($options->subscription_exposed_id);
-    return $this->stripe->subscriptions->retrieve($subscription_exposed_id,$__extra)->toArray();
+    return $this->stripe->subscriptions->retrieve($subscription_exposed_id, json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
   // /v1/subscriptions/{subscription_exposed_id} - post
@@ -4436,7 +5127,38 @@ class stripe extends Module
     option_require($options, 'subscription_exposed_id');
     $subscription_exposed_id = $options->subscription_exposed_id;
     unset($options->subscription_exposed_id);
-    return $this->stripe->subscriptions->deleteDiscount($subscription_exposed_id,$__extra)->toArray();
+    return $this->stripe->subscriptions->deleteDiscount($subscription_exposed_id, json_decode(json_encode($options), true),$__extra)->toArray();
+  }
+
+  // /v1/tax_codes - get
+  public function listTaxCodes($options) {
+    $options = $this->app->parseObject($options, NULL, TRUE);
+    $__extra = isset($options->__extra) ? (array)$options->__extra : null;
+    if (isset($options->__extra)) {
+      if (count($__extra) == 0) {
+        $__extra = null;
+      }
+      unset($options->__extra);
+    }
+
+    return $this->stripe->taxCodes->all(json_decode(json_encode($options), true),$__extra)->toArray();
+  }
+
+  // /v1/tax_codes/{id} - get
+  public function retrieveTaxCode($options) {
+    $options = $this->app->parseObject($options, NULL, TRUE);
+    $__extra = isset($options->__extra) ? (array)$options->__extra : null;
+    if (isset($options->__extra)) {
+      if (count($__extra) == 0) {
+        $__extra = null;
+      }
+      unset($options->__extra);
+    }
+
+    option_require($options, 'id');
+    $id = $options->id;
+    unset($options->id);
+    return $this->stripe->taxCodes->retrieve($id, json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
   // /v1/tax_rates - get
@@ -4481,7 +5203,7 @@ class stripe extends Module
     option_require($options, 'tax_rate');
     $tax_rate = $options->tax_rate;
     unset($options->tax_rate);
-    return $this->stripe->taxRates->retrieve($tax_rate,$__extra)->toArray();
+    return $this->stripe->taxRates->retrieve($tax_rate, json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
   // /v1/tax_rates/{tax_rate} - post
@@ -4499,6 +5221,85 @@ class stripe extends Module
     $tax_rate = $options->tax_rate;
     unset($options->tax_rate);
     return $this->stripe->taxRates->update($tax_rate, json_decode(json_encode($options), true),$__extra)->toArray();
+  }
+
+  // /v1/terminal/configurations - get
+  public function listTerminalConfigurations($options) {
+    $options = $this->app->parseObject($options, NULL, TRUE);
+    $__extra = isset($options->__extra) ? (array)$options->__extra : null;
+    if (isset($options->__extra)) {
+      if (count($__extra) == 0) {
+        $__extra = null;
+      }
+      unset($options->__extra);
+    }
+
+    return $this->stripe->terminal->configurations->all(json_decode(json_encode($options), true),$__extra)->toArray();
+  }
+
+  // /v1/terminal/configurations - post
+  public function createTerminalConfiguration($options) {
+    $options = $this->app->parseObject($options, NULL, TRUE);
+    $__extra = isset($options->__extra) ? (array)$options->__extra : null;
+    if (isset($options->__extra)) {
+      if (count($__extra) == 0) {
+        $__extra = null;
+      }
+      unset($options->__extra);
+    }
+
+    return $this->stripe->terminal->configurations->create(json_decode(json_encode($options), true),$__extra)->toArray();
+  }
+
+  // /v1/terminal/configurations/{configuration} - delete
+  public function deleteTerminalConfiguration($options) {
+    $options = $this->app->parseObject($options, NULL, TRUE);
+    $__extra = isset($options->__extra) ? (array)$options->__extra : null;
+    if (isset($options->__extra)) {
+      if (count($__extra) == 0) {
+        $__extra = null;
+      }
+      unset($options->__extra);
+    }
+
+    option_require($options, 'configuration');
+    $configuration = $options->configuration;
+    unset($options->configuration);
+    return $this->stripe->terminal->configurations->delete($configuration, json_decode(json_encode($options), true),$__extra)->toArray();
+  }
+
+  // /v1/terminal/configurations/{configuration} - get
+  public function retrieveTerminalConfiguration($options) {
+    $options = $this->app->parseObject($options, NULL, TRUE);
+    $__extra = isset($options->__extra) ? (array)$options->__extra : null;
+    if (isset($options->__extra)) {
+      if (count($__extra) == 0) {
+        $__extra = null;
+      }
+      unset($options->__extra);
+    }
+
+    option_require($options, 'configuration');
+    $configuration = $options->configuration;
+    unset($options->configuration);
+    return $this->stripe->terminal->configurations->retrieve($configuration, json_decode(json_encode($options), true),$__extra)->toArray();
+  }
+
+  // /v1/terminal/configurations/{configuration} - post
+  public function updateTerminalConfiguration($options) {
+    $options = $this->app->parseObject($options, NULL, TRUE);
+    $__extra = isset($options->__extra) ? (array)$options->__extra : null;
+    if (isset($options->__extra)) {
+      if (count($__extra) == 0) {
+        $__extra = null;
+      }
+      unset($options->__extra);
+    }
+
+    option_require($options, 'configuration');
+    $configuration = $options->configuration;
+    unset($options->configuration);
+    return $this->stripe->terminal->configurations->update($configuration, json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
   // /v1/terminal/connection_tokens - post
@@ -4557,7 +5358,7 @@ class stripe extends Module
     option_require($options, 'location');
     $location = $options->location;
     unset($options->location);
-    return $this->stripe->terminal->locations->delete($location,$__extra)->toArray();
+    return $this->stripe->terminal->locations->delete($location, json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
   // /v1/terminal/locations/{location} - get
@@ -4574,7 +5375,7 @@ class stripe extends Module
     option_require($options, 'location');
     $location = $options->location;
     unset($options->location);
-    return $this->stripe->terminal->locations->retrieve($location,$__extra)->toArray();
+    return $this->stripe->terminal->locations->retrieve($location, json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
   // /v1/terminal/locations/{location} - post
@@ -4636,7 +5437,7 @@ class stripe extends Module
     option_require($options, 'reader');
     $reader = $options->reader;
     unset($options->reader);
-    return $this->stripe->terminal->readers->delete($reader,$__extra)->toArray();
+    return $this->stripe->terminal->readers->delete($reader, json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
   // /v1/terminal/readers/{reader} - get
@@ -4653,7 +5454,7 @@ class stripe extends Module
     option_require($options, 'reader');
     $reader = $options->reader;
     unset($options->reader);
-    return $this->stripe->terminal->readers->retrieve($reader,$__extra)->toArray();
+    return $this->stripe->terminal->readers->retrieve($reader, json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
   // /v1/terminal/readers/{reader} - post
@@ -4671,6 +5472,187 @@ class stripe extends Module
     $reader = $options->reader;
     unset($options->reader);
     return $this->stripe->terminal->readers->update($reader, json_decode(json_encode($options), true),$__extra)->toArray();
+  }
+
+  // /v1/terminal/readers/{reader}/cancel_action - post
+  public function cancelActionTerminalReader($options) {
+    $options = $this->app->parseObject($options, NULL, TRUE);
+    $__extra = isset($options->__extra) ? (array)$options->__extra : null;
+    if (isset($options->__extra)) {
+      if (count($__extra) == 0) {
+        $__extra = null;
+      }
+      unset($options->__extra);
+    }
+
+    option_require($options, 'reader');
+    $reader = $options->reader;
+    unset($options->reader);
+    return $this->stripe->terminal->readers->cancelAction($reader, json_decode(json_encode($options), true),$__extra)->toArray();
+  }
+
+  // /v1/terminal/readers/{reader}/process_payment_intent - post
+  public function processPaymentIntentTerminalReader($options) {
+    $options = $this->app->parseObject($options, NULL, TRUE);
+    $__extra = isset($options->__extra) ? (array)$options->__extra : null;
+    if (isset($options->__extra)) {
+      if (count($__extra) == 0) {
+        $__extra = null;
+      }
+      unset($options->__extra);
+    }
+
+    option_require($options, 'reader');
+    $reader = $options->reader;
+    unset($options->reader);
+    return $this->stripe->terminal->readers->processPaymentIntent($reader, json_decode(json_encode($options), true),$__extra)->toArray();
+  }
+
+  // /v1/terminal/readers/{reader}/process_setup_intent - post
+  public function processSetupIntentTerminalReader($options) {
+    $options = $this->app->parseObject($options, NULL, TRUE);
+    $__extra = isset($options->__extra) ? (array)$options->__extra : null;
+    if (isset($options->__extra)) {
+      if (count($__extra) == 0) {
+        $__extra = null;
+      }
+      unset($options->__extra);
+    }
+
+    option_require($options, 'reader');
+    $reader = $options->reader;
+    unset($options->reader);
+    return $this->stripe->terminal->readers->processSetupIntent($reader, json_decode(json_encode($options), true),$__extra)->toArray();
+  }
+
+  // /v1/terminal/readers/{reader}/set_reader_display - post
+  public function setReaderDisplayTerminalReader($options) {
+    $options = $this->app->parseObject($options, NULL, TRUE);
+    $__extra = isset($options->__extra) ? (array)$options->__extra : null;
+    if (isset($options->__extra)) {
+      if (count($__extra) == 0) {
+        $__extra = null;
+      }
+      unset($options->__extra);
+    }
+
+    option_require($options, 'reader');
+    $reader = $options->reader;
+    unset($options->reader);
+    return $this->stripe->terminal->readers->setReaderDisplay($reader, json_decode(json_encode($options), true),$__extra)->toArray();
+  }
+
+  // /v1/test_helpers/refunds/{refund}/expire - post
+  public function expireTestHelpersRefund($options) {
+    $options = $this->app->parseObject($options, NULL, TRUE);
+    $__extra = isset($options->__extra) ? (array)$options->__extra : null;
+    if (isset($options->__extra)) {
+      if (count($__extra) == 0) {
+        $__extra = null;
+      }
+      unset($options->__extra);
+    }
+
+    option_require($options, 'refund');
+    $refund = $options->refund;
+    unset($options->refund);
+    return $this->stripe->testHelpers->refunds->expire($refund, json_decode(json_encode($options), true),$__extra)->toArray();
+  }
+
+  // /v1/test_helpers/terminal/readers/{reader}/present_payment_method - post
+  public function presentPaymentMethodTestHelpersTerminalReader($options) {
+    $options = $this->app->parseObject($options, NULL, TRUE);
+    $__extra = isset($options->__extra) ? (array)$options->__extra : null;
+    if (isset($options->__extra)) {
+      if (count($__extra) == 0) {
+        $__extra = null;
+      }
+      unset($options->__extra);
+    }
+
+    option_require($options, 'reader');
+    $reader = $options->reader;
+    unset($options->reader);
+    return $this->stripe->testHelpers->terminal->readers->presentPaymentMethod($reader, json_decode(json_encode($options), true),$__extra)->toArray();
+  }
+
+  // /v1/test_helpers/test_clocks - get
+  public function listTestHelpersTestClocks($options) {
+    $options = $this->app->parseObject($options, NULL, TRUE);
+    $__extra = isset($options->__extra) ? (array)$options->__extra : null;
+    if (isset($options->__extra)) {
+      if (count($__extra) == 0) {
+        $__extra = null;
+      }
+      unset($options->__extra);
+    }
+
+    return $this->stripe->testHelpers->testClocks->all(json_decode(json_encode($options), true),$__extra)->toArray();
+  }
+
+  // /v1/test_helpers/test_clocks - post
+  public function createTestHelpersTestClock($options) {
+    $options = $this->app->parseObject($options, NULL, TRUE);
+    $__extra = isset($options->__extra) ? (array)$options->__extra : null;
+    if (isset($options->__extra)) {
+      if (count($__extra) == 0) {
+        $__extra = null;
+      }
+      unset($options->__extra);
+    }
+
+    return $this->stripe->testHelpers->testClocks->create(json_decode(json_encode($options), true),$__extra)->toArray();
+  }
+
+  // /v1/test_helpers/test_clocks/{test_clock} - delete
+  public function deleteTestHelpersTestClock($options) {
+    $options = $this->app->parseObject($options, NULL, TRUE);
+    $__extra = isset($options->__extra) ? (array)$options->__extra : null;
+    if (isset($options->__extra)) {
+      if (count($__extra) == 0) {
+        $__extra = null;
+      }
+      unset($options->__extra);
+    }
+
+    option_require($options, 'test_clock');
+    $test_clock = $options->test_clock;
+    unset($options->test_clock);
+    return $this->stripe->testHelpers->testClocks->delete($test_clock, json_decode(json_encode($options), true),$__extra)->toArray();
+  }
+
+  // /v1/test_helpers/test_clocks/{test_clock} - get
+  public function retrieveTestHelpersTestClock($options) {
+    $options = $this->app->parseObject($options, NULL, TRUE);
+    $__extra = isset($options->__extra) ? (array)$options->__extra : null;
+    if (isset($options->__extra)) {
+      if (count($__extra) == 0) {
+        $__extra = null;
+      }
+      unset($options->__extra);
+    }
+
+    option_require($options, 'test_clock');
+    $test_clock = $options->test_clock;
+    unset($options->test_clock);
+    return $this->stripe->testHelpers->testClocks->retrieve($test_clock, json_decode(json_encode($options), true),$__extra)->toArray();
+  }
+
+  // /v1/test_helpers/test_clocks/{test_clock}/advance - post
+  public function advanceTestHelpersTestClock($options) {
+    $options = $this->app->parseObject($options, NULL, TRUE);
+    $__extra = isset($options->__extra) ? (array)$options->__extra : null;
+    if (isset($options->__extra)) {
+      if (count($__extra) == 0) {
+        $__extra = null;
+      }
+      unset($options->__extra);
+    }
+
+    option_require($options, 'test_clock');
+    $test_clock = $options->test_clock;
+    unset($options->test_clock);
+    return $this->stripe->testHelpers->testClocks->advance($test_clock, json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
   // /v1/tokens - post
@@ -4701,7 +5683,7 @@ class stripe extends Module
     option_require($options, 'token');
     $token = $options->token;
     unset($options->token);
-    return $this->stripe->tokens->retrieve($token,$__extra)->toArray();
+    return $this->stripe->tokens->retrieve($token, json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
   // /v1/topups - get
@@ -4746,7 +5728,7 @@ class stripe extends Module
     option_require($options, 'topup');
     $topup = $options->topup;
     unset($options->topup);
-    return $this->stripe->topups->retrieve($topup,$__extra)->toArray();
+    return $this->stripe->topups->retrieve($topup, json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
   // /v1/topups/{topup} - post
@@ -4780,7 +5762,7 @@ class stripe extends Module
     option_require($options, 'topup');
     $topup = $options->topup;
     unset($options->topup);
-    return $this->stripe->topups->cancel($topup,$__extra)->toArray();
+    return $this->stripe->topups->cancel($topup, json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
   // /v1/transfers - get
@@ -4823,7 +5805,9 @@ class stripe extends Module
     }
 
     option_require($options, 'id');
-    return $this->stripe->transfers->listReversals(json_decode(json_encode($options), true),$__extra)->toArray();
+    $id = $options->id;
+    unset($options->id);
+    return $this->stripe->transfers->listReversals($id, json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
   // /v1/transfers/{id}/reversals - post
@@ -4857,7 +5841,7 @@ class stripe extends Module
     option_require($options, 'transfer');
     $transfer = $options->transfer;
     unset($options->transfer);
-    return $this->stripe->transfers->retrieve($transfer,$__extra)->toArray();
+    return $this->stripe->transfers->retrieve($transfer, json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
   // /v1/transfers/{transfer} - post
@@ -4894,7 +5878,7 @@ class stripe extends Module
     option_require($options, 'transfer');
     $transfer = $options->transfer;
     unset($options->transfer);
-    return $this->stripe->transfers->retrieveReversal($id, $transfer,$__extra)->toArray();
+    return $this->stripe->transfers->retrieveReversal($id, $transfer, json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
   // /v1/transfers/{transfer}/reversals/{id} - post
@@ -4959,7 +5943,7 @@ class stripe extends Module
     option_require($options, 'webhook_endpoint');
     $webhook_endpoint = $options->webhook_endpoint;
     unset($options->webhook_endpoint);
-    return $this->stripe->webhookEndpoints->delete($webhook_endpoint,$__extra)->toArray();
+    return $this->stripe->webhookEndpoints->delete($webhook_endpoint, json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
   // /v1/webhook_endpoints/{webhook_endpoint} - get
@@ -4976,7 +5960,7 @@ class stripe extends Module
     option_require($options, 'webhook_endpoint');
     $webhook_endpoint = $options->webhook_endpoint;
     unset($options->webhook_endpoint);
-    return $this->stripe->webhookEndpoints->retrieve($webhook_endpoint,$__extra)->toArray();
+    return $this->stripe->webhookEndpoints->retrieve($webhook_endpoint, json_decode(json_encode($options), true),$__extra)->toArray();
   }
 
   // /v1/webhook_endpoints/{webhook_endpoint} - post

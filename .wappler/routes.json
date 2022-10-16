@@ -9,6 +9,12 @@
           "path": "/registor",
           "id": "routeRegistration",
           "url": "registor.php"
+        },
+        {
+          "type": "page",
+          "path": "/gala-dinner",
+          "id": "routeGalaDinner",
+          "url": "gala_dinner.php"
         }
       ]
     }

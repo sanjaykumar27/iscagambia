@@ -15,7 +15,7 @@ class s3 extends Module
 {
     public function provider($options, $name) {
         $pos = stripos($options->endpoint, '.amazonaws');
-        $region = 'us-east-1';
+        $region = isset($options->region) ? $options->region : 'us-east-1';
 
         if ($pos) {
             $region = substr($options->endpoint, 3, $pos - 3);
@@ -43,7 +43,7 @@ class s3 extends Module
 		if (FileSystem::exists($path)) {
             require(FileSystem::encode($path));
             $data = json_decode($exports);
-            return $this->provider($data->options, $name);
+            return $this->provider($this->app->parseObject($data->options), $name);
 		}
 		
 		throw new \Exception('S3 Client "' . $name . '" not found.');
@@ -63,7 +63,7 @@ class s3 extends Module
             'ACL' => $options->acl
         ));
 
-        $client->waitUntil('BucketExists', array(
+        $s3->waitUntil('BucketExists', array(
             'Bucket' => $options->bucket
         ));
 

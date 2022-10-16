@@ -9,3 +9,16 @@ RewriteRule ^/?(?:/)?$ index.php [QSA,NC,L]
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^/?registor(?:/)?$ index.php [QSA,NC,L]
 ## End Wappler routing
+
+## Wappler routing
+RewriteEngine On
+<IfModule mod_negotiation.c>
+    Options -MultiViews
+</IfModule>
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^/?(?:/)?$ index.php [QSA,NC,L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^/?registor(?:/)?$ index.php [QSA,NC,L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^/?gala-dinner(?:/)?$ index.php [QSA,NC,L]
+## End Wappler routing
