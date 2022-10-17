@@ -2,10 +2,133 @@
   "schema": {
     "tables": {
       "user_form": {
-        "db": {}
+        "db": {
+          "engine": "InnoDB",
+          "schema": "iscagamb_forms",
+          "collation": "utf8mb4_general_ci",
+          "system_versioned": false
+        },
+        "columns": {
+          "user_id": {
+            "db": {
+              "type": "increments",
+              "primary": true,
+              "nullable": false
+            }
+          },
+          "payment_reference": {
+            "db": {
+              "type": "string",
+              "maxLength": 125,
+              "primary": false,
+              "nullable": false
+            }
+          },
+          "email": {
+            "db": {
+              "type": "string",
+              "maxLength": 125,
+              "primary": false,
+              "nullable": false
+            }
+          },
+          "family_name": {
+            "db": {
+              "type": "string",
+              "maxLength": 100,
+              "primary": false,
+              "nullable": false
+            }
+          },
+          "first_middle_name": {
+            "db": {
+              "type": "string",
+              "maxLength": 125,
+              "primary": false,
+              "nullable": false
+            }
+          },
+          "principle_number": {
+            "db": {
+              "type": "string",
+              "maxLength": 125,
+              "primary": false,
+              "nullable": false
+            }
+          },
+          "alternate_number": {
+            "db": {
+              "type": "string",
+              "maxLength": 125,
+              "primary": false,
+              "nullable": false
+            }
+          },
+          "whatsapp_number": {
+            "db": {
+              "type": "string",
+              "maxLength": 125,
+              "primary": false,
+              "nullable": false
+            }
+          },
+          "your_address": {
+            "db": {
+              "type": "text",
+              "maxLength": 65535,
+              "primary": false,
+              "nullable": false
+            }
+          },
+          "your_organization": {
+            "db": {
+              "type": "text",
+              "maxLength": 65535,
+              "primary": false,
+              "nullable": false
+            }
+          },
+          "resident_permit": {
+            "db": {
+              "type": "text",
+              "maxLength": 65535,
+              "primary": false,
+              "nullable": false
+            }
+          },
+          "passport": {
+            "db": {
+              "type": "text",
+              "maxLength": 65535,
+              "primary": false,
+              "nullable": false
+            }
+          },
+          "payment_reciept": {
+            "db": {
+              "type": "text",
+              "maxLength": 65535,
+              "primary": false,
+              "nullable": false
+            }
+          },
+          "payment_method": {
+            "db": {
+              "type": "string",
+              "maxLength": 125,
+              "primary": false,
+              "nullable": false
+            }
+          }
+        }
       },
       "users": {
-        "db": {},
+        "db": {
+          "engine": "InnoDB",
+          "schema": "iscagamb_forms",
+          "collation": "latin1_swedish_ci",
+          "system_versioned": false
+        },
         "columns": {
           "id": {
             "db": {
@@ -34,15 +157,267 @@
             }
           }
         }
+      },
+      "booking": {
+        "db": {
+          "engine": "InnoDB",
+          "schema": "iscagamb_forms",
+          "collation": "utf8_unicode_ci",
+          "system_versioned": false
+        },
+        "columns": {
+          "booking_id": {
+            "db": {
+              "type": "increments",
+              "primary": true,
+              "nullable": false
+            }
+          },
+          "first_name": {
+            "db": {
+              "type": "string",
+              "maxLength": 255,
+              "primary": false,
+              "nullable": false
+            }
+          },
+          "last_name": {
+            "db": {
+              "type": "string",
+              "maxLength": 255,
+              "primary": false,
+              "nullable": false
+            }
+          },
+          "email": {
+            "db": {
+              "type": "string",
+              "maxLength": 255,
+              "primary": false,
+              "nullable": false
+            }
+          },
+          "mobile": {
+            "db": {
+              "type": "string",
+              "maxLength": 15,
+              "primary": false,
+              "nullable": false
+            }
+          },
+          "person_type": {
+            "db": {
+              "type": "enum",
+              "enumValues": [
+                "Adult",
+                "Child"
+              ],
+              "maxLength": 5,
+              "primary": false,
+              "nullable": false
+            }
+          },
+          "payment_receipt": {
+            "db": {
+              "type": "string",
+              "maxLength": 255,
+              "primary": false,
+              "nullable": false
+            }
+          },
+          "meal_type": {
+            "db": {
+              "type": "enum",
+              "enumValues": [
+                "Veg Gujrati",
+                "Regular Veg - Non Veg Meal"
+              ],
+              "maxLength": 26,
+              "primary": false,
+              "nullable": false
+            }
+          },
+          "membership_type": {
+            "db": {
+              "type": "enum",
+              "enumValues": [
+                "Platinum",
+                "Gold",
+                "Silver"
+              ],
+              "maxLength": 8,
+              "primary": false,
+              "nullable": false
+            }
+          },
+          "member_type": {
+            "db": {
+              "type": "enum",
+              "enumValues": [
+                "Member",
+                "Non Member"
+              ],
+              "maxLength": 10,
+              "primary": false,
+              "nullable": false
+            }
+          },
+          "seat_type": {
+            "db": {
+              "type": "enum",
+              "enumValues": [
+                "Table",
+                "Seat"
+              ],
+              "maxLength": 5,
+              "primary": false,
+              "nullable": false
+            }
+          },
+          "created_on": {
+            "db": {
+              "type": "datetime",
+              "default": "knex.fn.now()",
+              "primary": false,
+              "nullable": false
+            }
+          }
+        },
+        "sub": {
+          "booking_seats": "booking_id"
+        }
+      },
+      "booking_seats": {
+        "db": {
+          "engine": "InnoDB",
+          "schema": "iscagamb_forms",
+          "collation": "utf8_unicode_ci",
+          "system_versioned": false
+        },
+        "parent": "booking"
       }
     },
-    "views": {}
+    "views": {},
+    "collations": [
+      {
+        "collation": "utf8_general_ci",
+        "charset": "utf8"
+      },
+      {
+        "collation": "utf8_general_mysql500_ci",
+        "charset": "utf8"
+      },
+      {
+        "collation": "utf8mb4_general_ci",
+        "charset": "utf8mb4"
+      },
+      {
+        "collation": "utf8mb4_bin",
+        "charset": "utf8mb4"
+      },
+      {
+        "collation": "utf8mb4_unicode_ci",
+        "charset": "utf8mb4"
+      },
+      {
+        "collation": "utf8mb4_icelandic_ci",
+        "charset": "utf8mb4"
+      },
+      {
+        "collation": "utf8mb4_latvian_ci",
+        "charset": "utf8mb4"
+      },
+      {
+        "collation": "utf8mb4_romanian_ci",
+        "charset": "utf8mb4"
+      },
+      {
+        "collation": "utf8mb4_slovenian_ci",
+        "charset": "utf8mb4"
+      },
+      {
+        "collation": "utf8mb4_polish_ci",
+        "charset": "utf8mb4"
+      },
+      {
+        "collation": "utf8mb4_estonian_ci",
+        "charset": "utf8mb4"
+      },
+      {
+        "collation": "utf8mb4_spanish_ci",
+        "charset": "utf8mb4"
+      },
+      {
+        "collation": "utf8mb4_swedish_ci",
+        "charset": "utf8mb4"
+      },
+      {
+        "collation": "utf8mb4_turkish_ci",
+        "charset": "utf8mb4"
+      },
+      {
+        "collation": "utf8mb4_czech_ci",
+        "charset": "utf8mb4"
+      },
+      {
+        "collation": "utf8mb4_danish_ci",
+        "charset": "utf8mb4"
+      },
+      {
+        "collation": "utf8mb4_lithuanian_ci",
+        "charset": "utf8mb4"
+      },
+      {
+        "collation": "utf8mb4_slovak_ci",
+        "charset": "utf8mb4"
+      },
+      {
+        "collation": "utf8mb4_spanish2_ci",
+        "charset": "utf8mb4"
+      },
+      {
+        "collation": "utf8mb4_roman_ci",
+        "charset": "utf8mb4"
+      },
+      {
+        "collation": "utf8mb4_persian_ci",
+        "charset": "utf8mb4"
+      },
+      {
+        "collation": "utf8mb4_esperanto_ci",
+        "charset": "utf8mb4"
+      },
+      {
+        "collation": "utf8mb4_hungarian_ci",
+        "charset": "utf8mb4"
+      },
+      {
+        "collation": "utf8mb4_sinhala_ci",
+        "charset": "utf8mb4"
+      },
+      {
+        "collation": "utf8mb4_german2_ci",
+        "charset": "utf8mb4"
+      },
+      {
+        "collation": "utf8mb4_croatian_ci",
+        "charset": "utf8mb4"
+      },
+      {
+        "collation": "utf8mb4_unicode_520_ci",
+        "charset": "utf8mb4"
+      },
+      {
+        "collation": "utf8mb4_vietnamese_ci",
+        "charset": "utf8mb4"
+      }
+    ]
   },
   "type": "mysql",
   "connection": {
-    "host": "119.18.58.235",
+    "host": "iscagambia.com",
     "port": 3306,
-    "user": "root",
+    "user": "iscagamb_iscagambia",
     "password": "0kVw.,-8?EIa",
     "database": "iscagamb_forms",
     "charset": "utf8"
