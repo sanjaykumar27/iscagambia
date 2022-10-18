@@ -334,6 +334,38 @@
               "primary": false,
               "nullable": false
             }
+          },
+          "member_name": {
+            "db": {
+              "type": "string",
+              "maxLength": 255,
+              "primary": false,
+              "nullable": false
+            }
+          },
+          "meal_type": {
+            "db": {
+              "type": "string",
+              "maxLength": 125,
+              "primary": false,
+              "nullable": false
+            }
+          },
+          "member_type": {
+            "db": {
+              "type": "string",
+              "maxLength": 125,
+              "primary": false,
+              "nullable": false
+            }
+          },
+          "seat_type": {
+            "db": {
+              "type": "string",
+              "maxLength": 11,
+              "primary": false,
+              "nullable": false
+            }
           }
         },
         "parent": "booking"

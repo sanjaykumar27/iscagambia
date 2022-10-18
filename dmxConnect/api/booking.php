@@ -70,11 +70,7 @@ $app->define(<<<'JSON'
         "type": "text",
         "fieldName": "first_name",
         "options": {
-          "rules": {
-            "core:required": {
-              "param": ""
-            }
-          }
+          "rules": {}
         },
         "name": "first_name"
       },
@@ -119,6 +115,46 @@ $app->define(<<<'JSON'
       },
       {
         "type": "array",
+        "name": "seats",
+        "sub": [
+          {
+            "type": "text",
+            "fieldName": "seats[{{$index}}][seat_name]",
+            "multiple": true,
+            "name": "seat_name"
+          },
+          {
+            "type": "text",
+            "fieldName": "seats[{{$index}}][name]",
+            "multiple": true,
+            "options": {
+              "rules": {
+                "core:required": {
+                  "param": ""
+                }
+              }
+            },
+            "name": "name"
+          },
+          {
+            "type": "text",
+            "fieldName": "seats[{{$index}}][meal_type]",
+            "name": "meal_type"
+          },
+          {
+            "type": "text",
+            "fieldName": "seats[{{$index}}][member_type]",
+            "name": "member_type"
+          },
+          {
+            "type": "text",
+            "fieldName": "seats[{{$index}}][seat_type]",
+            "name": "seat_type"
+          }
+        ]
+      },
+      {
+        "type": "array",
         "name": "record",
         "sub": [
           {
@@ -127,7 +163,23 @@ $app->define(<<<'JSON'
           },
           {
             "type": "text",
-            "name": "$value"
+            "name": "seat_name"
+          },
+          {
+            "type": "text",
+            "name": "name"
+          },
+          {
+            "type": "text",
+            "name": "meal_type"
+          },
+          {
+            "type": "text",
+            "name": "member_type"
+          },
+          {
+            "type": "text",
+            "name": "seat_type"
           }
         ]
       }
@@ -185,18 +237,6 @@ $app->define(<<<'JSON'
             "values": [
               {
                 "table": "booking",
-                "column": "first_name",
-                "type": "text",
-                "value": "{{$_POST.first_name}}"
-              },
-              {
-                "table": "booking",
-                "column": "last_name",
-                "type": "text",
-                "value": "{{$_POST.last_name}}"
-              },
-              {
-                "table": "booking",
                 "column": "email",
                 "type": "text",
                 "value": "{{$_POST.email}}"
@@ -209,12 +249,6 @@ $app->define(<<<'JSON'
               },
               {
                 "table": "booking",
-                "column": "person_type",
-                "type": "text",
-                "value": "{{$_POST.member_type}}"
-              },
-              {
-                "table": "booking",
                 "column": "membership_type",
                 "type": "text",
                 "value": "{{$_POST.plan_type}}"
@@ -224,78 +258,30 @@ $app->define(<<<'JSON'
                 "column": "payment_receipt",
                 "type": "text",
                 "value": "{{reciept.path}}"
-              },
-              {
-                "table": "booking",
-                "column": "meal_type",
-                "type": "text",
-                "value": "{{$_POST.meal_type}}"
-              },
-              {
-                "table": "booking",
-                "column": "member_type",
-                "type": "text",
-                "value": "{{$_POST.member_type}}"
-              },
-              {
-                "table": "booking",
-                "column": "seat_type",
-                "type": "text",
-                "value": "{{$_POST.seat_type}}"
               }
             ],
             "table": "booking",
-            "query": "INSERT INTO booking\n(first_name, last_name, email, mobile, person_type, membership_type, payment_receipt, meal_type, member_type, seat_type) VALUES (:P1 /* {{$_POST.first_name}} */, :P2 /* {{$_POST.last_name}} */, :P3 /* {{$_POST.email}} */, :P4 /* {{$_POST.mobile}} */, :P5 /* {{$_POST.member_type}} */, :P6 /* {{$_POST.plan_type}} */, :P7 /* {{reciept.path}} */, :P8 /* {{$_POST.meal_type}} */, :P9 /* {{$_POST.member_type}} */, :P10 /* {{$_POST.seat_type}} */)",
+            "query": "INSERT INTO booking\n(email, mobile, membership_type, payment_receipt) VALUES (:P1 /* {{$_POST.email}} */, :P2 /* {{$_POST.mobile}} */, :P3 /* {{$_POST.plan_type}} */, :P4 /* {{reciept.path}} */)",
             "params": [
               {
                 "name": ":P1",
                 "type": "expression",
-                "value": "{{$_POST.first_name}}"
+                "value": "{{$_POST.email}}"
               },
               {
                 "name": ":P2",
                 "type": "expression",
-                "value": "{{$_POST.last_name}}"
+                "value": "{{$_POST.mobile}}"
               },
               {
                 "name": ":P3",
                 "type": "expression",
-                "value": "{{$_POST.email}}"
+                "value": "{{$_POST.plan_type}}"
               },
               {
                 "name": ":P4",
                 "type": "expression",
-                "value": "{{$_POST.mobile}}"
-              },
-              {
-                "name": ":P5",
-                "type": "expression",
-                "value": "{{$_POST.member_type}}"
-              },
-              {
-                "name": ":P6",
-                "type": "expression",
-                "value": "{{$_POST.plan_type}}"
-              },
-              {
-                "name": ":P7",
-                "type": "expression",
                 "value": "{{reciept.path}}"
-              },
-              {
-                "name": ":P8",
-                "type": "expression",
-                "value": "{{$_POST.meal_type}}"
-              },
-              {
-                "name": ":P9",
-                "type": "expression",
-                "value": "{{$_POST.member_type}}"
-              },
-              {
-                "name": ":P10",
-                "type": "expression",
-                "value": "{{$_POST.seat_type}}"
               }
             ],
             "returning": "booking_id"
@@ -317,8 +303,14 @@ $app->define(<<<'JSON'
         "module": "core",
         "action": "repeat",
         "options": {
-          "repeat": "{{$_POST.platinum_seats.split(',')}}",
-          "outputFields": [],
+          "repeat": "{{$_POST.seats}}",
+          "outputFields": [
+            "seat_name",
+            "name",
+            "meal_type",
+            "member_type",
+            "seat_type"
+          ],
           "exec": {
             "steps": {
               "name": "iBookingSeats",
@@ -339,18 +331,42 @@ $app->define(<<<'JSON'
                       "table": "booking_seats",
                       "column": "seat",
                       "type": "text",
-                      "value": "{{$value}}"
+                      "value": "{{seat_name}}"
                     },
                     {
                       "table": "booking_seats",
                       "column": "accept_reject",
                       "type": "text",
                       "value": "HOLD"
+                    },
+                    {
+                      "table": "booking_seats",
+                      "column": "member_name",
+                      "type": "text",
+                      "value": "{{name}}"
+                    },
+                    {
+                      "table": "booking_seats",
+                      "column": "meal_type",
+                      "type": "text",
+                      "value": "{{meal_type}}"
+                    },
+                    {
+                      "table": "booking_seats",
+                      "column": "member_type",
+                      "type": "text",
+                      "value": "{{member_type}}"
+                    },
+                    {
+                      "table": "booking_seats",
+                      "column": "seat_type",
+                      "type": "text",
+                      "value": "{{seat_type}}"
                     }
                   ],
                   "table": "booking_seats",
                   "returning": "seat_id",
-                  "query": "INSERT INTO booking_seats\n(booking_id, seat, accept_reject) VALUES (:P1 /* {{insert.identity}} */, :P2 /* {{$value}} */, 'HOLD')",
+                  "query": "INSERT INTO booking_seats\n(booking_id, seat, accept_reject, member_name, meal_type, member_type, seat_type) VALUES (:P1 /* {{insert.identity}} */, :P2 /* {{seat_name}} */, 'HOLD', :P3 /* {{name}} */, :P4 /* {{meal_type}} */, :P5 /* {{member_type}} */, :P6 /* {{seat_type}} */)",
                   "params": [
                     {
                       "name": ":P1",
@@ -360,7 +376,27 @@ $app->define(<<<'JSON'
                     {
                       "name": ":P2",
                       "type": "expression",
-                      "value": "{{$value}}"
+                      "value": "{{seat_name}}"
+                    },
+                    {
+                      "name": ":P3",
+                      "type": "expression",
+                      "value": "{{name}}"
+                    },
+                    {
+                      "name": ":P4",
+                      "type": "expression",
+                      "value": "{{meal_type}}"
+                    },
+                    {
+                      "name": ":P5",
+                      "type": "expression",
+                      "value": "{{member_type}}"
+                    },
+                    {
+                      "name": ":P6",
+                      "type": "expression",
+                      "value": "{{seat_type}}"
                     }
                   ]
                 }
@@ -395,180 +431,28 @@ $app->define(<<<'JSON'
           {
             "name": "$value",
             "type": "object"
-          }
-        ],
-        "outputType": "array"
-      },
-      {
-        "name": "repeatGold",
-        "module": "core",
-        "action": "repeat",
-        "options": {
-          "repeat": "{{$_POST.gold_seats.split(',')}}",
-          "outputFields": [],
-          "exec": {
-            "steps": {
-              "name": "iBookingSeats",
-              "module": "dbupdater",
-              "action": "insert",
-              "options": {
-                "connection": "DBConn",
-                "sql": {
-                  "type": "insert",
-                  "values": [
-                    {
-                      "table": "booking_seats",
-                      "column": "booking_id",
-                      "type": "number",
-                      "value": "{{insert.identity}}"
-                    },
-                    {
-                      "table": "booking_seats",
-                      "column": "seat",
-                      "type": "text",
-                      "value": "{{$value}}"
-                    },
-                    {
-                      "table": "booking_seats",
-                      "column": "accept_reject",
-                      "type": "text",
-                      "value": "HOLD"
-                    }
-                  ],
-                  "table": "booking_seats",
-                  "returning": "seat_id",
-                  "query": "INSERT INTO booking_seats\n(booking_id, seat, accept_reject) VALUES (:P1 /* {{insert.identity}} */, :P2 /* {{$value}} */, 'HOLD')",
-                  "params": [
-                    {
-                      "name": ":P1",
-                      "type": "expression",
-                      "value": "{{insert.identity}}"
-                    },
-                    {
-                      "name": ":P2",
-                      "type": "expression",
-                      "value": "{{$value}}"
-                    }
-                  ]
-                }
-              },
-              "meta": [
-                {
-                  "name": "identity",
-                  "type": "text"
-                },
-                {
-                  "name": "affected",
-                  "type": "number"
-                }
-              ]
-            }
-          }
-        },
-        "output": true,
-        "meta": [
-          {
-            "name": "$index",
-            "type": "number"
           },
           {
-            "name": "$number",
-            "type": "number"
+            "name": "seat_name",
+            "type": "text",
+            "multiple": true
           },
           {
-            "name": "$name",
+            "name": "name",
+            "type": "text",
+            "multiple": true
+          },
+          {
+            "name": "meal_type",
             "type": "text"
           },
           {
-            "name": "$value",
-            "type": "object"
-          }
-        ],
-        "outputType": "array"
-      },
-      {
-        "name": "repeatSilver",
-        "module": "core",
-        "action": "repeat",
-        "options": {
-          "repeat": "{{$_POST.silver_seats.split(',')}}",
-          "outputFields": [],
-          "exec": {
-            "steps": {
-              "name": "iBookingSeats",
-              "module": "dbupdater",
-              "action": "insert",
-              "options": {
-                "connection": "DBConn",
-                "sql": {
-                  "type": "insert",
-                  "values": [
-                    {
-                      "table": "booking_seats",
-                      "column": "booking_id",
-                      "type": "number",
-                      "value": "{{insert.identity}}"
-                    },
-                    {
-                      "table": "booking_seats",
-                      "column": "seat",
-                      "type": "text",
-                      "value": "{{$value}}"
-                    },
-                    {
-                      "table": "booking_seats",
-                      "column": "accept_reject",
-                      "type": "text",
-                      "value": "HOLD"
-                    }
-                  ],
-                  "table": "booking_seats",
-                  "returning": "seat_id",
-                  "query": "INSERT INTO booking_seats\n(booking_id, seat, accept_reject) VALUES (:P1 /* {{insert.identity}} */, :P2 /* {{$value}} */, 'HOLD')",
-                  "params": [
-                    {
-                      "name": ":P1",
-                      "type": "expression",
-                      "value": "{{insert.identity}}"
-                    },
-                    {
-                      "name": ":P2",
-                      "type": "expression",
-                      "value": "{{$value}}"
-                    }
-                  ]
-                }
-              },
-              "meta": [
-                {
-                  "name": "identity",
-                  "type": "text"
-                },
-                {
-                  "name": "affected",
-                  "type": "number"
-                }
-              ]
-            }
-          }
-        },
-        "output": true,
-        "meta": [
-          {
-            "name": "$index",
-            "type": "number"
-          },
-          {
-            "name": "$number",
-            "type": "number"
-          },
-          {
-            "name": "$name",
+            "name": "member_type",
             "type": "text"
           },
           {
-            "name": "$value",
-            "type": "object"
+            "name": "seat_type",
+            "type": "text"
           }
         ],
         "outputType": "array"
