@@ -294,6 +294,48 @@
           "collation": "utf8_unicode_ci",
           "system_versioned": false
         },
+        "columns": {
+          "seat_id": {
+            "db": {
+              "type": "increments",
+              "primary": true,
+              "nullable": false
+            }
+          },
+          "booking_id": {
+            "db": {
+              "type": "reference",
+              "primary": false,
+              "nullable": false,
+              "references": "booking_id",
+              "inTable": "booking",
+              "referenceType": "integer",
+              "onUpdate": "RESTRICT",
+              "onDelete": "RESTRICT"
+            }
+          },
+          "seat": {
+            "db": {
+              "type": "string",
+              "maxLength": 15,
+              "primary": false,
+              "nullable": false
+            }
+          },
+          "accept_reject": {
+            "db": {
+              "type": "enum",
+              "enumValues": [
+                "HOLD",
+                "ACCEPT",
+                "REJECTED"
+              ],
+              "maxLength": 8,
+              "primary": false,
+              "nullable": false
+            }
+          }
+        },
         "parent": "booking"
       }
     },

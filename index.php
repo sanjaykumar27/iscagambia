@@ -72,7 +72,7 @@
                             <a class="nav-link fs-5 text-dark me-3" href="#">Contact</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link fs-5 text-white me-3" href="./gala-dinner">Gala Dinner</a>
+                            <a class="nav-link fs-5 text-dark me-3" href="./gala-dinner">Gala Dinner</a>
                         </li>
                     </ul>
                 </div>
