@@ -150,6 +150,10 @@ $app->define(<<<'JSON'
             "type": "text",
             "fieldName": "seats[{{$index}}][seat_type]",
             "name": "seat_type"
+          },
+          {
+            "type": "text",
+            "name": "price"
           }
         ]
       },
@@ -180,6 +184,10 @@ $app->define(<<<'JSON'
           {
             "type": "text",
             "name": "seat_type"
+          },
+          {
+            "type": "number",
+            "name": "price"
           }
         ]
       }
@@ -362,11 +370,17 @@ $app->define(<<<'JSON'
                       "column": "seat_type",
                       "type": "text",
                       "value": "{{seat_type}}"
+                    },
+                    {
+                      "table": "booking_seats",
+                      "column": "price",
+                      "type": "number",
+                      "value": "{{price}}"
                     }
                   ],
                   "table": "booking_seats",
                   "returning": "seat_id",
-                  "query": "INSERT INTO booking_seats\n(booking_id, seat, accept_reject, member_name, meal_type, member_type, seat_type) VALUES (:P1 /* {{insert.identity}} */, :P2 /* {{seat_name}} */, 'HOLD', :P3 /* {{name}} */, :P4 /* {{meal_type}} */, :P5 /* {{member_type}} */, :P6 /* {{seat_type}} */)",
+                  "query": "INSERT INTO booking_seats\n(booking_id, seat, accept_reject, member_name, meal_type, member_type, seat_type, price) VALUES (:P1 /* {{insert.identity}} */, :P2 /* {{seat_name}} */, 'HOLD', :P3 /* {{name}} */, :P4 /* {{meal_type}} */, :P5 /* {{member_type}} */, :P6 /* {{seat_type}} */, :P7 /* {{price}} */)",
                   "params": [
                     {
                       "name": ":P1",
@@ -397,6 +411,11 @@ $app->define(<<<'JSON'
                       "name": ":P6",
                       "type": "expression",
                       "value": "{{seat_type}}"
+                    },
+                    {
+                      "name": ":P7",
+                      "type": "expression",
+                      "value": "{{price}}"
                     }
                   ]
                 }

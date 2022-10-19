@@ -5,8 +5,7 @@
         "db": {
           "engine": "InnoDB",
           "schema": "iscagamb_forms",
-          "collation": "utf8mb4_general_ci",
-          "system_versioned": false
+          "collation": "utf8mb4_general_ci"
         },
         "columns": {
           "user_id": {
@@ -126,8 +125,7 @@
         "db": {
           "engine": "InnoDB",
           "schema": "iscagamb_forms",
-          "collation": "latin1_swedish_ci",
-          "system_versioned": false
+          "collation": "latin1_swedish_ci"
         },
         "columns": {
           "id": {
@@ -162,8 +160,7 @@
         "db": {
           "engine": "InnoDB",
           "schema": "iscagamb_forms",
-          "collation": "utf8_unicode_ci",
-          "system_versioned": false
+          "collation": "utf8_unicode_ci"
         },
         "columns": {
           "booking_id": {
@@ -291,8 +288,7 @@
         "db": {
           "engine": "InnoDB",
           "schema": "iscagamb_forms",
-          "collation": "utf8_unicode_ci",
-          "system_versioned": false
+          "collation": "utf8_unicode_ci"
         },
         "columns": {
           "seat_id": {
@@ -363,6 +359,13 @@
             "db": {
               "type": "string",
               "maxLength": 11,
+              "primary": false,
+              "nullable": false
+            }
+          },
+          "price": {
+            "db": {
+              "type": "integer",
               "primary": false,
               "nullable": false
             }
