@@ -7,7 +7,6 @@
     <meta charset="UTF-8">
     <title>Records</title>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="bootstrap/5/css/bootstrap.min.css" />
     <link rel="stylesheet" href="dmxAppConnect/dmxBootstrap5TableGenerator/dmxBootstrap5TableGenerator.css" />
@@ -19,15 +18,18 @@
     <script src="dmxAppConnect/dmxBootstrap5Modal/dmxBootstrap5Modal.js" defer=""></script>
     <link rel="stylesheet" href="dmxAppConnect/dmxDropzone/dmxDropzone.css" />
     <script src="dmxAppConnect/dmxDropzone/dmxDropzone.js" defer=""></script>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-VhBcF/php0Z/P5ZxlxaEx1GwqTQVIBu4G4giRWxTKOCjTxsPFETUDdVL5B6vYvOt" crossorigin="anonymous" />
+    <script src="dmxAppConnect/dmxFormatter/dmxFormatter.js" defer></script>
 </head>
 
 <body is="dmx-app" id="admin">
-
+    <dmx-serverconnect id="scChangeSeatApproval" url="dmxConnect/api/updateSeatStatus.php" noload dmx-on:success="scGetBookingDetails.load({booking_id: ddRecords.data.booking_id})"></dmx-serverconnect>
+    <dmx-serverconnect id="scGetBookingDetails" url="dmxConnect/api/getBookingDetails.php" noload></dmx-serverconnect>
 
     <dmx-query-manager id="qm"></dmx-query-manager>
     <div is="dmx-browser" id="browser1"></div>
-    <dmx-data-detail id="ddRecords" dmx-bind:data="scGetRecords.data.query.data"></dmx-data-detail>
-    <dmx-serverconnect id="scGetRecords" url="dmxConnect/api/fetchData.php" dmx-on:unauthorized="browser1.goto('login.php')" dmx-param:limit="10" dmx-param:offset="query.offset" dmx-param:sort="query.sort" dmx-param:dir="query.dir">
+    <dmx-data-detail id="ddRecords" dmx-bind:data="scGetRecords.data.query.data" key="booking_id"></dmx-data-detail>
+    <dmx-serverconnect id="scGetRecords" url="dmxConnect/api/getDinnerRequest.php" dmx-on:unauthorized="browser1.goto('login.php')" dmx-param:limit="10" dmx-param:offset="query.offset" dmx-param:sort="query.sort" dmx-param:dir="query.dir">
     </dmx-serverconnect>
     <header>
         <nav class="navbar navbar-expand-lg navbar-light bg-light py-4 px-5">
@@ -48,11 +50,9 @@
                             <a class="nav-link fs-5 text-dark me-3" href="admin-gala-dinner.php" dmx-on:click="modalGallery.show()" internal>Gala Dinner Requests</a>
                         </li>
                     </ul>
-
                 </div>
             </div>
         </nav>
-
     </header>
     <div class="container-fluid my-5">
         <div class="card bg-light">
@@ -61,39 +61,26 @@
                     <table class="table table-striped table-bordered table-hover">
                         <thead>
                             <tr>
-                                <th>User</th>
-                                <th>Payment reference</th>
-                                <th>Email</th>
-                                <th>Family name</th>
-                                <th>First middle name</th>
-                                <th>Principle number</th>
-                                <th>Alternate number</th>
-                                <th>Whatsapp number</th>
-                                <th>Your address</th>
-                                <th>Your organization</th>
-                                <th>Resident permit</th>
-                                <th>Passport</th>
-                                <th>Payment reciept</th>
-                                <th>Payment method</th>
+                                <th>Booking ID</th>
+                                <th>Email ID</th>
+                                <th>Mobile</th>
+                                <th>Payment Receipt</th>
+                                <th>Plan Type</th>
+                                <th>Request Date</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody is="dmx-repeat" dmx-generator="bs5table" dmx-bind:repeat="scGetRecords.data.query.data" id="tableRepeat1">
                             <tr>
-                                <td dmx-text="user_id"></td>
-                                <td dmx-text="payment_reference"></td>
+                                <td dmx-text="booking_id"></td>
                                 <td dmx-text="email"></td>
-                                <td dmx-text="family_name"></td>
-                                <td dmx-text="first_middle_name"></td>
-                                <td dmx-text="principle_number"></td>
-                                <td dmx-text="alternate_number"></td>
-                                <td dmx-text="whatsapp_number"></td>
-                                <td dmx-text="your_address"></td>
-                                <td dmx-text="your_organization"></td>
-                                <td><a dmx-bind:href="resident_permit" target="_blank">Show File</a></td>
-                                <td><a dmx-bind:href="passport" target="_blank">Show File</a></td>
-                                <td><a dmx-bind:href="payment_reciept" target="_blank">Show File</a></td>
-                                <td dmx-text="payment_method"></td>
-
+                                <td dmx-text="mobile"></td>
+                                <td><a dmx-bind:href="payment_receipt" target="_blank">Show File</a></td>
+                                <td>{{membership_type}}</td>
+                                <td>{{created_on}}</td>
+                                <td>
+                                    <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalBookingDetails" dmx-on:click="scGetBookingDetails.load({booking_id: booking_id});ddRecords.select(booking_id)">Seat Details</button>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
@@ -116,6 +103,57 @@
                     </li>
                 </ul>
 
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalBookingDetails" is="dmx-bs5-modal" tabindex="-1" dmx-on:hide-bs-modal="ddRecords.select('')">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Booking Details: {{ddRecords.data.booking_id}} - {{ddRecords.data.membership_type}}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Member Name</th>
+                                    <th>Meal Type</th>
+                                    <th>Member Type</th>
+                                    <th>Adult/Child</th>
+                                    <th>Price</th>
+                                    <th>Seat</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody is="dmx-repeat" dmx-generator="bs5table" dmx-bind:repeat="scGetBookingDetails.data.query" id="tableRepeatSeats" key="seat_id">
+                                <tr>
+                                    <td>{{$index + 1}}</td>
+                                    <td dmx-text="member_name"></td>
+                                    <td dmx-text="meal_type"></td>
+                                    <td>{{member_type}}</td>
+                                    <td>{{seat_type}}</td>
+                                    <td>{{price}}</td>
+                                    <td>{{seat}}</td>
+                                    <td>
+                                        <span dmx-show="accept_reject != 'HOLD'">{{accept_reject == 'ACCEPT' ? 'APPROVED' : 'REJECTED'}}</span>
+                                        <div class="d-flex" dmx-show="accept_reject == 'HOLD'">
+                                            <button dmx-bind:disabled="scChangeSeatApproval.state.executing" class="me-2 btn btn-icon btn-success btn-sm"><i class="fas fa-check" dmx-on:click="scChangeSeatApproval.load({seat_id: seat_id, accept_reject: 'ACCEPT'})"></i> <span dmx-show="scChangeSeatApproval.state.executing" class="spinner-border spinner-border-sm ms-1" dmx-show:disabled="state.executing" role="status"></span></button>
+                                            <button dmx-bind:disabled="scChangeSeatApproval.state.executing" class="btn btn-icon btn-danger btn-sm" dmx-on:click="scChangeSeatApproval.load({seat_id: seat_id, accept_reject: 'REJECTED'})"><i class="fas fa-times"></i><span dmx-show="scChangeSeatApproval.state.executing" class="spinner-border spinner-border-sm ms-1" dmx-show:disabled="state.executing" role="status"></span></button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
             </div>
         </div>
     </div>

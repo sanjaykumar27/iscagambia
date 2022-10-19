@@ -40,18 +40,16 @@
   <div class="card mt-4">
     <div class="bg-white border border-2 border-dark card-body rounded-3 shadow-lg">
       <div class="d-flex justify-content-center">
-        <img src="assets/images/logo.jpeg" class="img-fluid" style="height:100px">
+        <img src="assets/images/gala_dinner_banner.jpg" class="img-fluid" style="height:236px">
       </div>
-      <p class="fs-3 text-center">Gala Dinner Registration form</p>
       <form action="dmxConnect/api/booking.php" type="post" class=" border-top" id="formRegisterDinner" is="dmx-serverconnect-form" method="post" dmx-on:success="notif.success('Dinner Registration Successful!');formRegisterDinner.reset()">
         <input type="hidden" name="platinum_seats" dmx-bind:value="arrPlatinum.items">
         <input type="hidden" name="gold_seats" dmx-bind:value="arrGold.items">
         <input type="hidden" name="silver_seats" dmx-bind:value="arrSilver.items">
-        <p class="pt-2 text-center"><strong>Date: </strong> 29 October | <strong>Time: </strong>8 pm <strong>Venue: </strong> Jama Hall, Kairaba Hotel</p>
 
         <div class="row">
-          <p class="mb-0 text-center mt-2 text-primary fw-bold text-uppercase">Booking Type</p>
-          <div class="col d-flex justify-content-center">
+          <p class="mb-2 text-center mt-2 text-primary fw-bold text-uppercase">Booking Type</p>
+          <div class="col d-flex justify-content-center align-items-center">
             <div class="form-check d-flex align-items-center mb-3 ms-4">
               <input class="form-check-input me-3" type="radio" name="plan_type" value="Platinum" id="radioPlatinum">
               <label class="form-check-label mb-0" for="radioPlatinum">
@@ -203,7 +201,7 @@
             <div is="dmx-repeat" class="d-flex justify-content-between flex-column" id="repeatSeatsPlatinum" dmx-bind:repeat="arrPlatinum.items">
               <input type="hidden" dmx-bind:value="$value" dmx-bind:name="seats[{{$index}}][seat_name]">
               <input type="hidden" dmx-bind:value="(4000 + (radioNonMember.checked ? 500 : 0)) / (radioChild.checked ? 2 : 1).round(0)" dmx-bind:name="seats[{{$index}}][price]">
-              <div class="row mb-3">
+              <div class="row mb-3 align-items-end">
                 <div class="col-3">
                   <label for="">Member Name <span class="text-danger">*</span><span class="text-info">SEAT: {{$value}}</span> | <span class="text-danger">Price: {{(4000 + (radioNonMember.checked ? 500 : 0)) / (radioChild.checked ? 2 : 1).round(0)}}</span></label>
                   <input type="text" class="form-control form-control-sm" dmx-bind:name="seats[{{$index}}][name]" required>
@@ -238,13 +236,13 @@
                 </div>
                 <div class="col-auto d-flex">
                   <div class="form-check d-flex align-items-center mb-3">
-                    <input class="form-check-input me-3" checked type="radio" dmx-bind:name="seats[{{$index}}][seat_type]" value="Veg Gujrati" id="radioAdult" dmx-bind:id="radioAdult{{$index}}">
+                    <input class="form-check-input me-3" checked type="radio" dmx-bind:name="seats[{{$index}}][seat_type]" value="Adult" id="radioAdult" dmx-bind:id="radioAdult{{$index}}">
                     <label class="form-check-label mb-0" dmx-bind:for="radioAdult{{$index}}">
                       Adult
                     </label>
                   </div>
                   <div class="form-check d-flex align-items-center mb-3 ms-4">
-                    <input class="form-check-input me-3" type="radio" dmx-bind:name="seats[{{$index}}][seat_type]" value="Regular Veg - Non Veg Meal" id="radioChild" dmx-bind:id="radioChild{{$index}}">
+                    <input class="form-check-input me-3" type="radio" dmx-bind:name="seats[{{$index}}][seat_type]" value="Child" id="radioChild" dmx-bind:id="radioChild{{$index}}">
                     <label class="form-check-label mb-0" dmx-bind:for="radioChild{{$index}}">
                       Child
                     </label>
@@ -292,13 +290,13 @@
                 </div>
                 <div class="col-auto d-flex">
                   <div class="form-check d-flex align-items-center mb-3">
-                    <input class="form-check-input me-3" checked type="radio" dmx-bind:name="seats[{{$index}}][seat_type]" value="Veg Gujrati" id="radioAdult1">
+                    <input class="form-check-input me-3" checked type="radio" dmx-bind:name="seats[{{$index}}][seat_type]" value="Adult" id="radioAdult1">
                     <label class="form-check-label mb-0" for="radioAdult1">
                       Adult
                     </label>
                   </div>
                   <div class="form-check d-flex align-items-center mb-3 ms-4">
-                    <input class="form-check-input me-3" type="radio" dmx-bind:name="seats[{{$index}}][seat_type]" value="Regular Veg - Non Veg Meal" id="radioChild1">
+                    <input class="form-check-input me-3" type="radio" dmx-bind:name="seats[{{$index}}][seat_type]" value="Child" id="radioChild1">
                     <label class="form-check-label mb-0" for="radioChild1">
                       Child
                     </label>
@@ -346,13 +344,13 @@
                 </div>
                 <div class="col-auto d-flex">
                   <div class="form-check d-flex align-items-center mb-3">
-                    <input class="form-check-input me-3" checked type="radio" dmx-bind:name="seats[{{$index}}][seat_type]" value="Veg Gujrati" id="radioAdult2">
+                    <input class="form-check-input me-3" checked type="radio" dmx-bind:name="seats[{{$index}}][seat_type]" value="Adult" id="radioAdult2">
                     <label class="form-check-label mb-0" for="radioAdult2">
                       Adult
                     </label>
                   </div>
                   <div class="form-check d-flex align-items-center mb-3 ms-4">
-                    <input class="form-check-input me-3" type="radio" dmx-bind:name="seats[{{$index}}][seat_type]" value="Regular Veg - Non Veg Meal" id="radioChild2">
+                    <input class="form-check-input me-3" type="radio" dmx-bind:name="seats[{{$index}}][seat_type]" value="Child" id="radioChild2">
                     <label class="form-check-label mb-0" for="radioChild2">
                       Child
                     </label>
@@ -363,7 +361,7 @@
           </div>
         </div>
 
-        <div class="row mt-3">
+        <div class="row mt-3 justify-content-center">
           <div class="col-12 col-md-6 col-lg-4 mt-3 mt-md-0 mt-lg-0">
             <label for="">Email <span class="text-danger">*</span></label>
             <input type="email" class="form-control" name="email" required>
