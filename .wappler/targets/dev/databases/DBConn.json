@@ -5,7 +5,8 @@
         "db": {
           "engine": "InnoDB",
           "schema": "iscagamb_forms",
-          "collation": "utf8mb4_general_ci"
+          "collation": "utf8mb4_general_ci",
+          "system_versioned": false
         },
         "columns": {
           "user_id": {
@@ -125,7 +126,8 @@
         "db": {
           "engine": "InnoDB",
           "schema": "iscagamb_forms",
-          "collation": "latin1_swedish_ci"
+          "collation": "latin1_swedish_ci",
+          "system_versioned": false
         },
         "columns": {
           "id": {
@@ -156,11 +158,102 @@
           }
         }
       },
+      "booking_seats": {
+        "db": {
+          "engine": "InnoDB",
+          "schema": "iscagamb_forms",
+          "collation": "utf8_unicode_ci",
+          "system_versioned": false
+        },
+        "columns": {
+          "seat_id": {
+            "db": {
+              "type": "increments",
+              "primary": true,
+              "nullable": false
+            }
+          },
+          "booking_id": {
+            "db": {
+              "type": "reference",
+              "primary": false,
+              "nullable": false,
+              "references": "booking_id",
+              "inTable": "booking",
+              "referenceType": "integer",
+              "onUpdate": "RESTRICT",
+              "onDelete": "RESTRICT"
+            }
+          },
+          "seat": {
+            "db": {
+              "type": "string",
+              "maxLength": 15,
+              "primary": false,
+              "nullable": false
+            }
+          },
+          "accept_reject": {
+            "db": {
+              "type": "enum",
+              "enumValues": [
+                "HOLD",
+                "ACCEPT",
+                "REJECTED"
+              ],
+              "maxLength": 8,
+              "primary": false,
+              "nullable": false
+            }
+          },
+          "member_name": {
+            "db": {
+              "type": "string",
+              "maxLength": 255,
+              "primary": false,
+              "nullable": false
+            }
+          },
+          "meal_type": {
+            "db": {
+              "type": "string",
+              "maxLength": 125,
+              "primary": false,
+              "nullable": false
+            }
+          },
+          "member_type": {
+            "db": {
+              "type": "string",
+              "maxLength": 125,
+              "primary": false,
+              "nullable": false
+            }
+          },
+          "seat_type": {
+            "db": {
+              "type": "string",
+              "maxLength": 11,
+              "primary": false,
+              "nullable": false
+            }
+          },
+          "price": {
+            "db": {
+              "type": "integer",
+              "primary": false,
+              "nullable": false
+            }
+          }
+        },
+        "parent": "booking"
+      },
       "booking": {
         "db": {
           "engine": "InnoDB",
           "schema": "iscagamb_forms",
-          "collation": "utf8_unicode_ci"
+          "collation": "utf8_unicode_ci",
+          "system_versioned": false
         },
         "columns": {
           "booking_id": {
@@ -278,100 +371,19 @@
               "primary": false,
               "nullable": false
             }
+          },
+          "ticked_emailed": {
+            "db": {
+              "type": "boolean",
+              "default": "'0'",
+              "primary": false,
+              "nullable": false
+            }
           }
         },
         "sub": {
           "booking_seats": "booking_id"
         }
-      },
-      "booking_seats": {
-        "db": {
-          "engine": "InnoDB",
-          "schema": "iscagamb_forms",
-          "collation": "utf8_unicode_ci"
-        },
-        "columns": {
-          "seat_id": {
-            "db": {
-              "type": "increments",
-              "primary": true,
-              "nullable": false
-            }
-          },
-          "booking_id": {
-            "db": {
-              "type": "reference",
-              "primary": false,
-              "nullable": false,
-              "references": "booking_id",
-              "inTable": "booking",
-              "referenceType": "integer",
-              "onUpdate": "RESTRICT",
-              "onDelete": "RESTRICT"
-            }
-          },
-          "seat": {
-            "db": {
-              "type": "string",
-              "maxLength": 15,
-              "primary": false,
-              "nullable": false
-            }
-          },
-          "accept_reject": {
-            "db": {
-              "type": "enum",
-              "enumValues": [
-                "HOLD",
-                "ACCEPT",
-                "REJECTED"
-              ],
-              "maxLength": 8,
-              "primary": false,
-              "nullable": false
-            }
-          },
-          "member_name": {
-            "db": {
-              "type": "string",
-              "maxLength": 255,
-              "primary": false,
-              "nullable": false
-            }
-          },
-          "meal_type": {
-            "db": {
-              "type": "string",
-              "maxLength": 125,
-              "primary": false,
-              "nullable": false
-            }
-          },
-          "member_type": {
-            "db": {
-              "type": "string",
-              "maxLength": 125,
-              "primary": false,
-              "nullable": false
-            }
-          },
-          "seat_type": {
-            "db": {
-              "type": "string",
-              "maxLength": 11,
-              "primary": false,
-              "nullable": false
-            }
-          },
-          "price": {
-            "db": {
-              "type": "integer",
-              "primary": false,
-              "nullable": false
-            }
-          }
-        },
-        "parent": "booking"
       }
     },
     "views": {},

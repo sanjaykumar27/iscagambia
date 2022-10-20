@@ -20,9 +20,14 @@
     <script src="dmxAppConnect/dmxDropzone/dmxDropzone.js" defer=""></script>
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-VhBcF/php0Z/P5ZxlxaEx1GwqTQVIBu4G4giRWxTKOCjTxsPFETUDdVL5B6vYvOt" crossorigin="anonymous" />
     <script src="dmxAppConnect/dmxFormatter/dmxFormatter.js" defer></script>
+    <link rel="stylesheet" href="dmxAppConnect/dmxNotifications/dmxNotifications.css" />
+    <script src="dmxAppConnect/dmxNotifications/dmxNotifications.js" defer></script>
 </head>
 
 <body is="dmx-app" id="admin">
+    <dmx-value id="varBookingID"></dmx-value>
+    <dmx-notifications id="notif"></dmx-notifications>
+    <dmx-serverconnect id="scSendTickets" url="dmxConnect/api/sendTickets.php" dmx-on:success="notif.success('Tickets Emailed!');scGetRecords.load()" noload></dmx-serverconnect>
     <dmx-serverconnect id="scChangeSeatApproval" url="dmxConnect/api/updateSeatStatus.php" noload dmx-on:success="scGetBookingDetails.load({booking_id: ddRecords.data.booking_id})"></dmx-serverconnect>
     <dmx-serverconnect id="scGetBookingDetails" url="dmxConnect/api/getBookingDetails.php" noload></dmx-serverconnect>
 
@@ -67,6 +72,7 @@
                                 <th>Payment Receipt</th>
                                 <th>Plan Type</th>
                                 <th>Request Date</th>
+                                <th>Ticket Status</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -78,8 +84,10 @@
                                 <td><a dmx-bind:href="payment_receipt" target="_blank">Show File</a></td>
                                 <td>{{membership_type}}</td>
                                 <td>{{created_on}}</td>
+                                <td>{{ticked_emailed == 0 ? 'PENDING' : 'TICKET SENT'}}</td>
                                 <td>
                                     <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalBookingDetails" dmx-on:click="scGetBookingDetails.load({booking_id: booking_id});ddRecords.select(booking_id)">Seat Details</button>
+                                    <button dmx-show="ticked_emailed == 0" class="btn ms-2 btn-dark" dmx-bind:disabled="scSendTickets.state.executing && varBookingID.value == booking_id" dmx-on:click="varBookingID.setValue(booking_id);scSendTickets.load({booking_id: booking_id})">Send Tickets <span dmx-show="scSendTickets.state.executing && varBookingID.value == booking_id" class="spinner-border spinner-border-sm ms-1" role="status"></span></button>
                                 </td>
                             </tr>
                         </tbody>

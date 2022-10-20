@@ -71,6 +71,10 @@ $app->define(<<<'JSON'
               {
                 "table": "booking",
                 "column": "payment_receipt"
+              },
+              {
+                "table": "booking",
+                "column": "ticked_emailed"
               }
             ],
             "table": {
@@ -78,7 +82,7 @@ $app->define(<<<'JSON'
             },
             "primary": "booking_id",
             "joins": [],
-            "query": "SELECT booking_id, email, mobile, membership_type, created_on, payment_receipt\nFROM booking\nORDER BY created_on DESC",
+            "query": "SELECT booking_id, email, mobile, membership_type, created_on, payment_receipt, ticked_emailed\nFROM booking\nORDER BY created_on DESC",
             "params": [],
             "orders": [
               {
@@ -167,6 +171,10 @@ $app->define(<<<'JSON'
               {
                 "type": "text",
                 "name": "payment_receipt"
+              },
+              {
+                "type": "boolean",
+                "name": "ticked_emailed"
               }
             ]
           }
