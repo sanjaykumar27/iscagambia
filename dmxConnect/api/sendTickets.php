@@ -48,6 +48,17 @@ $app->define(<<<'JSON'
         "output": true
       },
       {
+        "name": "note",
+        "module": "core",
+        "action": "setvalue",
+        "options": {
+          "key": "note",
+          "value": "<p>NOTE: Please bring along printed copy of the ticket to the venue</p>"
+        },
+        "meta": [],
+        "outputType": "text"
+      },
+      {
         "name": "qBookingDetails",
         "module": "dbconnector",
         "action": "single",
@@ -275,7 +286,7 @@ $app->define(<<<'JSON'
               "action": "setvalue",
               "options": {
                 "key": "html_content",
-                "value": "<br><br>{{html_content}}\n<table style=\"border:2px solid #000;margin-bottom:2px;border-bottom:0\">\n    <tr>\n      <td>\n        <div style=\"height:290px;width:290px;background-color:#eceff6;border-right:1px;padding:15px\">\n          <img style=\"height:65px\" src=\"https://iscagambia.com/assets/images/logo.jpeg\">\n          <p>Name: <strong>{{member_name}}</strong></p>\n          <p>Type: <strong>{{member_type}} - ({{seat_type}})</strong></p>\n          <p>Amount: <strong>{{price}}</strong></p>\n        </div>\n      </td>\n      <td><img style=\"height:320px;margin-left:-4px\" src=\"https://iscagambia.com/assets/images/ticket.jpeg\"></td>\n      <td>\n        <div style=\"height:290px;width:300px;background-color:#eceff6;border-right:1px;padding:15px;margin-left:-4px\">\n          <h3 style=\"color:brown;text-transform:uppercase;text-align:center\">LUCKY DIP TICKET</h3>\n          <h1 style=\"color:#ff8d00;text-transform:uppercase;text-align:center\">{{qBookingDetails.membership_type}}</h1>\n          <p style=\"color:#000;margin-top:20px;text-transform:uppercase;text-align:center\">TICKET NO:</p>\n          <p style=\"color:#ff8d00;font-size:22px;text-transform:uppercase;text-align:center;font-weight:600\">{{seat}}</p>\n          <img style=\"height:65px;float:right\" src=\"https://iscagambia.com/assets/images/logo.jpeg\">\n        </div>\n      </td>\n    </tr>\n  </table>\n  <table style=\"border:2px solid #000;border-top:2px dashed #000\">\n    <tr>\n      <td>\n        <div style=\"height:290px;width:290px;background-color:#eceff6;border-right:1px;padding:15px\">\n          <p style=\"margin-bottom:0px\">DUPLICATE</p><br>\n          <img style=\"height:65px\" src=\"https://iscagambia.com/assets/images/logo.jpeg\">\n          <p>Name: <strong>{{member_name}}</strong></p>\n          <p>Type: <strong>{{member_type}} - ({{seat_type}})</strong></p>\n          <p>Amount: <strong>{{price}}</strong></p>\n        </div>\n      </td>\n      <td><img style=\"height:320px;margin-left:-4px\" src=\"https://iscagambia.com/assets/images/ticket.jpeg\"></td>\n      <td>\n        <div style=\"height:290px;width:300px;background-color:#eceff6;border-right:1px;padding:15px;margin-left:-4px\">\n          <p>DUPLICATE</p>\n          <h3 style=\"color:brown;text-transform:uppercase;text-align:center\">LUCKY DIP TICKET</h3>\n          <h1 style=\"color:#ff8d00;text-transform:uppercase;text-align:center\">{{qBookingDetails.membership_type}}</h1>\n          <p style=\"color:#000;margin-top:20px;text-transform:uppercase;text-align:center\">TICKET NO:</p>\n          <p style=\"color:#ff8d00;font-size:22px;text-transform:uppercase;text-align:center;font-weight:600\">{{seat}}</p>\n          <img style=\"height:65px;float:right\" src=\"https://iscagambia.com/assets/images/logo.jpeg\">\n        </div>\n      </td>\n    </tr>\n  </table>"
+                "value": "<br><br>{{html_content}}\n<table style=\"border:2px solid #000;margin-bottom:2px;border-bottom:0\">\n    <tr>\n      <td>\n        <div style=\"height:290px;width:290px;background-color:#eceff6;border-right:1px;padding:15px\">\n          <img style=\"height:65px\" src=\"https://iscagambia.com/assets/images/logo.jpeg\">\n          <p>Name: <strong>{{member_name}}</strong></p>\n          <p>Type: <strong>{{member_type}} - ({{seat_type}})</strong></p>\n          <p>Amount: <strong>{{price}}</strong></p>\n        </div>\n      </td>\n      <td><img style=\"height:320px;margin-left:-4px\" src=\"https://iscagambia.com/assets/images/ticket.jpeg\"></td>\n      <td>\n        <div style=\"height:290px;width:300px;background-color:#eceff6;border-right:1px;padding:15px;margin-left:-4px\">\n          <h3 style=\"color:brown;text-transform:uppercase;text-align:center\">LUCKY DIP TICKET</h3>\n          <h1 style=\"color:#ff8d00;text-transform:uppercase;text-align:center\">{{qBookingDetails.membership_type}}</h1>\n          <p style=\"color:#000;margin-top:20px;text-transform:uppercase;text-align:center\">TICKET NO:</p>\n          <p style=\"color:#ff8d00;font-size:22px;text-transform:uppercase;text-align:center;font-weight:600\">{{seat}}</p>\n        </div>\n      </td>\n    </tr>\n  </table>\n  <table style=\"border:2px solid #000;border-top:2px dashed #000\">\n    <tr>\n      <td>\n        <div style=\"height:290px;width:290px;background-color:#eceff6;border-right:1px;padding:15px\">\n          <p style=\"margin-bottom:0px\">DUPLICATE</p><br>\n          <img style=\"height:65px\" src=\"https://iscagambia.com/assets/images/logo.jpeg\">\n          <p>Name: <strong>{{member_name}}</strong></p>\n          <p>Type: <strong>{{member_type}} - ({{seat_type}})</strong></p>\n          <p>Amount: <strong>{{price}}</strong></p>\n        </div>\n      </td>\n      <td><img style=\"height:320px;margin-left:-4px\" src=\"https://iscagambia.com/assets/images/ticket.jpeg\"></td>\n      <td>\n        <div style=\"height:290px;width:300px;background-color:#eceff6;border-right:1px;padding:15px;margin-left:-4px\">\n          <p>DUPLICATE</p>\n          <h3 style=\"color:brown;text-transform:uppercase;text-align:center\">LUCKY DIP TICKET</h3>\n          <h1 style=\"color:#ff8d00;text-transform:uppercase;text-align:center\">{{qBookingDetails.membership_type}}</h1>\n          <p style=\"color:#000;margin-top:20px;text-transform:uppercase;text-align:center\">TICKET NO:</p>\n          <p style=\"color:#ff8d00;font-size:22px;text-transform:uppercase;text-align:center;font-weight:600\">{{seat}}</p>\n        </div>\n      </td>\n    </tr>\n  </table>\n<p>&nbsp;</p>"
               },
               "meta": [],
               "outputType": "text",
@@ -320,6 +331,11 @@ $app->define(<<<'JSON'
           {
             "name": "price",
             "type": "number"
+          },
+          {
+            "name": "html_content",
+            "type": "text",
+            "sub": []
           }
         ],
         "outputType": "array"
@@ -337,7 +353,7 @@ $app->define(<<<'JSON'
           "replyTo": "office@iscagambia.com",
           "contentType": "html",
           "embedImages": true,
-          "body": "{{html_content}}",
+          "body": "{{html_content}} {{note}}",
           "subject": "Tickets"
         },
         "output": true
